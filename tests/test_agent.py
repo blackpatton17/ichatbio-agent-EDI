@@ -1,7 +1,7 @@
 import pytest
+from ichatbio.types import TextMessage, ArtifactMessage
 
 from src.agent import CataasAgent
-from ichatbio.types import TextMessage, ArtifactMessage
 
 
 @pytest.mark.asyncio

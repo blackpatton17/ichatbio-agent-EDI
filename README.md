@@ -2,4 +2,17 @@
 
 Reference code for making new iChatBio agents.
 
-Requires python >=3.10
+## Quickstart
+
+*Requires python 3.10 or higher*
+
+```bash
+# Setup
+python -m venv .venv
+pip install -r requirements.txt
+
+# Start up the agent web server
+python src
+```
+
+If everything worked, you should be able to find your agent card at http://localhost:9999/.well-known/agent.json.

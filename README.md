@@ -1,4 +1,5 @@
 # ichatbio-agent-example
-Boilerplate code for making new iChatbio agents.
 
-Requires python >=3.13
+Reference code for making new iChatBio agents.
+
+Requires python >=3.10

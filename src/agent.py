@@ -13,10 +13,16 @@ from pydantic import BaseModel
 from pydantic import Field
 
 from ichatbio.agent import IChatBioAgent
-from ichatbio.types import AgentCard, AgentEntrypoint
+from ichatbio.types import AgentCard, AgentEntrypoint, ProcessMessage
 from ichatbio.types import Message, TextMessage, ArtifactMessage
 
 dotenv.load_dotenv()
+
+CataasResponseFormat = Literal["png", "json"]
+
+
+class GetCatImageParameters(BaseModel):
+    format: CataasResponseFormat = "png"
 
 
 class CataasAgent(IChatBioAgent):
@@ -29,9 +35,9 @@ class CataasAgent(IChatBioAgent):
                 AgentEntrypoint(
                     id="get_cat_image",
                     description="Returns a random cat picture",
-                    parameters=None
+                    parameters=GetCatImageParameters
                 )
-            ],
+            ]
         )
 
     @override
@@ -39,17 +45,14 @@ class CataasAgent(IChatBioAgent):
         return self.agent_card
 
     @override
-    async def run(self, request: str, entrypoint: str, params: Optional[dict], **kwargs) -> AsyncGenerator[
-        Message, None]:
-        if not entrypoint == "get_cat_image":
-            # Complain
-            pass
-
+    async def run(self, request: str, entrypoint: str, params: Optional[BaseModel]) -> AsyncGenerator[Message, None]:
         openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         instructor_client = instructor.patch(openai_client)
 
         try:
-            cat = await instructor_client.chat.completions.create(
+            yield ProcessMessage(summary="Searching for cats", description="Generating search parameters")
+
+            cat: CatModel = await instructor_client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 response_model=CatModel,
                 messages=[
@@ -60,10 +63,21 @@ class CataasAgent(IChatBioAgent):
                 max_retries=3
             )
 
-            url = cat.to_url()
+            url = cat.to_url(params.format)
+
+            yield ProcessMessage(
+                summary="Retrieving cat",
+                description=f"Search parameters",
+                data={
+                    "search_parameters": cat.model_dump(exclude_none=True)
+                })
+
+            yield ProcessMessage(description=f"Sending GET request to {url}")
+
             response = requests.get(url)
 
-            yield TextMessage(text="Cat retrieved.")
+            yield ProcessMessage(summary="Cat retrieved", description=f"Received {len(response.content)} bytes")
+
             yield ArtifactMessage(
                 mimetype="image/png",
                 description=f"A random cat saying \"{cat.message}\"" if cat.message else "A random cat",
@@ -72,6 +86,10 @@ class CataasAgent(IChatBioAgent):
                     "api_query_url": url
                 }
             )
+
+            yield TextMessage(text="The generated artifact contains the requested image. Note that the artifact's "
+                                   "api_query_url returns random images so it should not be considered a location "
+                                   "or identifier for the image.")
 
         except InstructorRetryException as e:
             yield TextMessage(text="Sorry, I couldn't find any cat images.")
@@ -106,17 +124,24 @@ class CatModel(BaseModel):
                                       examples=[["orange"], ["calico", "sleeping"]])
     message: Optional[MessageModel] = Field(None, description="Text to add to the picture.")
 
-    def to_url(self):
+    def to_url(self, format: CataasResponseFormat):
         url = "https://cataas.com/cat"
+        params = {}
+
+        if format == "json":
+            params |= {"json": True}
+
         if self.tags:
             url += "/" + ",".join(self.tags)
+
         if self.message:
             url += f"/says/" + urllib.parse.quote(self.message.text)
-            params = {}
             if self.message.font_size:
                 params |= {"fontSize": self.message.font_size}
             if self.message.font_color:
                 params |= {"fontColor": self.message.font_color}
-            if params:
-                url += "?" + urlencode(params)
+
+        if params:
+            url += "?" + urlencode(params)
+
         return url

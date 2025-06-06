@@ -9,6 +9,7 @@ Reference code for making new iChatBio agents.
 ```bash
 # Setup
 python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 
 # Start up the agent web server

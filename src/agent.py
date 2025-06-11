@@ -47,6 +47,7 @@ class EDIAgent(IChatBioAgent):
 
     @override
     async def run(self, request: str, entrypoint: str, params: Optional[BaseModel]) -> AsyncGenerator[Message, None]:
+        # openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         instructor_client = instructor.patch(openai_client)
 

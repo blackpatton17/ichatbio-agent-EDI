@@ -125,7 +125,7 @@ class EDIAgent(IChatBioAgent):
 
 class EDIQueryModel(BaseModel):
     scope: Optional[str] = Field(None, description="The data scope (e.g., 'edi', 'knb', etc.)")
-    identifier: Optional[str] = Field(None, description="Dataset identifier number")
+    # identifier: Optional[str] = Field(None, description="Dataset identifier number")
     keywords: Optional[str] = Field(None, description="Keyword-based full-text search")
 
     def to_url(self):
@@ -143,6 +143,8 @@ class EDIQueryModel(BaseModel):
             "rows": 1000,
             "debug": "false"
         }
+        if self.scope:
+            query_params["fq"] = f"scope:{self.scope}"
         if self.keywords:
             query_params["q"] = f"keyword:{self.keywords}"
 

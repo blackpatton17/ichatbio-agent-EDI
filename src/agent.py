@@ -18,24 +18,25 @@ from ichatbio.types import Message, TextMessage, ArtifactMessage
 
 dotenv.load_dotenv()
 
-CataasResponseFormat = Literal["png", "json"]
+EDIResponseFormat = Literal["png", "json"]
 
 
-class GetCatImageParameters(BaseModel):
-    format: CataasResponseFormat = "png"
+class SearchEMLParameters(BaseModel):
+    scope: Optional[str] = None
+    identifier: Optional[str] = None
+    keywords: Optional[str] = None  # e.g., full-text search
 
 
-class CataasAgent(IChatBioAgent):
+class EDIAgent(IChatBioAgent):
     def __init__(self):
         self.agent_card = AgentCard(
-            name="Cat As A Service",
-            description="Retrieves random cat images from cataas.com.",
-            icon=None,
+            name="EDI Dataset Agent",
+            description="Searches datasets from PASTA+ EDI repository.",
             entrypoints=[
                 AgentEntrypoint(
-                    id="get_cat_image",
-                    description="Returns a random cat picture",
-                    parameters=GetCatImageParameters
+                    id="search_dataset",
+                    description="Searches EDI for datasets using metadata or keyword search.",
+                    parameters=SearchEMLParameters
                 )
             ]
         )
@@ -50,20 +51,27 @@ class CataasAgent(IChatBioAgent):
         instructor_client = instructor.patch(openai_client)
 
         try:
-            yield ProcessMessage(summary="Searching for cats", description="Generating search parameters")
+            yield ProcessMessage(summary="Generating EDI query", description="Parsing user intent")
 
-            cat: CatModel = await instructor_client.chat.completions.create(
+            edi_query: EDIQueryModel = await instructor_client.chat.completions.create(
                 model="gpt-3.5-turbo",
-                response_model=CatModel,
+                response_model=EDIQueryModel,
                 messages=[
                     {"role": "system",
-                     "content": "You translate user requests into Cat-As-A-Service (cataas.com) API parameters."},
+                    "content": "You translate user requests into query parameters for the PASTA+ EDI Data Package Manager API."},
                     {"role": "user", "content": request}
                 ],
                 max_retries=3
             )
 
-            url = cat.to_url(params.format)
+            url = edi_query.to_url()
+
+            yield ProcessMessage(
+                summary="Query constructed",
+                description="Using structured parameters to query EDI",
+                data={"search_parameters": edi_query.model_dump(exclude_none=True)}
+            )
+            
 
             yield ProcessMessage(
                 summary="Retrieving cat",
@@ -76,24 +84,60 @@ class CataasAgent(IChatBioAgent):
 
             response = requests.get(url)
 
-            yield ProcessMessage(summary="Cat retrieved", description=f"Received {len(response.content)} bytes")
+            if response.status_code != 200:
+                yield TextMessage(text=f"Query failed with status code {response.status_code}")
+                return
 
-            yield ArtifactMessage(
-                mimetype="image/png",
-                description=f"A random cat saying \"{cat.message}\"" if cat.message else "A random cat",
-                content=response.content,
-                metadata={
-                    "api_query_url": url
-                }
-            )
+            results = response.text.strip().splitlines()
 
-            yield TextMessage(text="The generated artifact contains the requested image. Note that the artifact's "
-                                   "api_query_url returns random images so it should not be considered a location "
-                                   "or identifier for the image.")
+            yield ProcessMessage(summary="Datasets retrieved", description=f"Found {len(results)} datasets")
+
+            if not results:
+                yield TextMessage(text="No datasets matched your query.")
+            else:
+                yield TextMessage(text="\n".join(results[:10]))  # Optional: show top 10 matches
+
+            # yield ProcessMessage(summary="Cat retrieved", description=f"Received {len(response.content)} bytes")
+
+            # yield ArtifactMessage(
+            #     mimetype="image/png",
+            #     description=f"A random cat saying \"{cat.message}\"" if cat.message else "A random cat",
+            #     content=response.content,
+            #     metadata={
+            #         "api_query_url": url
+            #     }
+            # )
+
+            # yield TextMessage(text="The generated artifact contains the requested image. Note that the artifact's "
+            #                        "api_query_url returns random images so it should not be considered a location "
+            #                        "or identifier for the image.")
 
         except InstructorRetryException as e:
             yield TextMessage(text="Sorry, I couldn't find any cat images.")
 
+
+class EDIQueryModel(BaseModel):
+    scope: Optional[str] = Field(None, description="The data scope (e.g., 'edi', 'knb', etc.)")
+    identifier: Optional[str] = Field(None, description="Dataset identifier number")
+    keywords: Optional[str] = Field(None, description="Keyword-based full-text search")
+
+    def to_url(self):
+        base_url = "https://pasta.lternet.edu/package/search/eml"
+        if self.scope and self.identifier:
+            url = f"{base_url}/{self.scope}/{self.identifier}"
+        elif self.scope:
+            url = f"{base_url}/{self.scope}"
+        else:
+            url = base_url
+
+        query_params = {}
+        if self.keywords:
+            query_params["q"] = self.keywords
+
+        if query_params:
+            url += "?" + urlencode(query_params)
+
+        return url
 
 COLORS = Literal[
     "white", "lightgray", "gray", "black", "red", "orange", "yellow", "green", "blue", "indigo", "violet", "pink"]
@@ -116,32 +160,32 @@ class MessageModel(BaseModel):
         return v
 
 
-class CatModel(BaseModel):
-    """API parameters for https://cataas.com."""
+# class CatModel(BaseModel):
+#     """API parameters for https://cataas.com."""
 
-    tags: Optional[list[str]] = Field(None,
-                                      description="One-word tags that describe the cat image to return. Leave blank to get any kind of cat picture.",
-                                      examples=[["orange"], ["calico", "sleeping"]])
-    message: Optional[MessageModel] = Field(None, description="Text to add to the picture.")
+#     tags: Optional[list[str]] = Field(None,
+#                                       description="One-word tags that describe the cat image to return. Leave blank to get any kind of cat picture.",
+#                                       examples=[["orange"], ["calico", "sleeping"]])
+#     message: Optional[MessageModel] = Field(None, description="Text to add to the picture.")
 
-    def to_url(self, format: CataasResponseFormat):
-        url = "https://cataas.com/cat"
-        params = {}
+#     def to_url(self, format: CataasResponseFormat):
+#         url = "https://cataas.com/cat"
+#         params = {}
 
-        if format == "json":
-            params |= {"json": True}
+#         if format == "json":
+#             params |= {"json": True}
 
-        if self.tags:
-            url += "/" + ",".join(self.tags)
+#         if self.tags:
+#             url += "/" + ",".join(self.tags)
 
-        if self.message:
-            url += f"/says/" + urllib.parse.quote(self.message.text)
-            if self.message.font_size:
-                params |= {"fontSize": self.message.font_size}
-            if self.message.font_color:
-                params |= {"fontColor": self.message.font_color}
+#         if self.message:
+#             url += f"/says/" + urllib.parse.quote(self.message.text)
+#             if self.message.font_size:
+#                 params |= {"fontSize": self.message.font_size}
+#             if self.message.font_color:
+#                 params |= {"fontColor": self.message.font_color}
 
-        if params:
-            url += "?" + urlencode(params)
+#         if params:
+#             url += "?" + urlencode(params)
 
-        return url
+#         return url

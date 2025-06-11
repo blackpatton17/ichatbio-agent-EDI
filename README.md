@@ -8,12 +8,12 @@ Reference code for making new iChatBio agents.
 
 ```bash
 # Setup
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # Start up the agent web server
-python src
+python3 src
 ```
 
 If everything worked, you should be able to find your agent card at http://localhost:9999/.well-known/agent.json.

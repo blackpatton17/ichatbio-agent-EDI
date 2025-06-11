@@ -1,6 +1,7 @@
 import os
 import urllib.parse
-from typing import Optional, Literal, override, AsyncGenerator
+from typing import Optional, Literal, AsyncGenerator
+from typing_extensions import override
 from urllib.parse import urlencode
 
 import dotenv
@@ -15,6 +16,9 @@ from pydantic import Field
 from ichatbio.agent import IChatBioAgent
 from ichatbio.types import AgentCard, AgentEntrypoint, ProcessMessage
 from ichatbio.types import Message, TextMessage, ArtifactMessage
+import json
+
+import xml.etree.ElementTree as ET
 
 dotenv.load_dotenv()
 
@@ -72,14 +76,6 @@ class EDIAgent(IChatBioAgent):
                 description="Using structured parameters to query EDI",
                 data={"search_parameters": edi_query.model_dump(exclude_none=True)}
             )
-            
-
-            yield ProcessMessage(
-                summary="Retrieving cat",
-                description=f"Search parameters",
-                data={
-                    "search_parameters": cat.model_dump(exclude_none=True)
-                })
 
             yield ProcessMessage(description=f"Sending GET request to {url}")
 
@@ -88,33 +84,43 @@ class EDIAgent(IChatBioAgent):
             if response.status_code != 200:
                 yield TextMessage(text=f"Query failed with status code {response.status_code}")
                 return
+            
+            yield ProcessMessage(
+                summary="Datasets retrieved"
+            )
 
-            results = response.text.strip().splitlines()
-
-            yield ProcessMessage(summary="Datasets retrieved", description=f"Found {len(results)} datasets")
+            results = response.text.strip()
 
             if not results:
                 yield TextMessage(text="No datasets matched your query.")
             else:
-                yield TextMessage(text="\n".join(results[:10]))  # Optional: show top 10 matches
+                entries = []
+                root = ET.fromstring(results)
+                # only take 10 top results
+                for doc in root.findall("document")[:10]:
+                    packageid = doc.findtext("packageid")
+                    keywords = [kw.text for kw in doc.findall("keywords/keyword")]
+                    # keywords_str = ", ".join(keywords)
+                    title = doc.findtext("title")
+                    # combined = f"{title} \n {keywords_str}".strip()
+                    # entries.append(f"- {packageid}: {combined} \n")
+                    entries.append({
+                        "packageid": packageid,
+                        "title": title,
+                        "keywords": keywords
+                    })
 
-            # yield ProcessMessage(summary="Cat retrieved", description=f"Received {len(response.content)} bytes")
+                # yield TextMessage(text="Top 10 matching dataset found:\n" + "\n".join(entries))
+                # yield TextMessage(text="Top 10 matching dataset")
+                yield ArtifactMessage(
+                    mimetype="application/json",
+                    description="Here are the top 10 matching datasets:",
+                    content=json.dumps({"datasets": entries}).encode("utf-8")
+                )
 
-            # yield ArtifactMessage(
-            #     mimetype="image/png",
-            #     description=f"A random cat saying \"{cat.message}\"" if cat.message else "A random cat",
-            #     content=response.content,
-            #     metadata={
-            #         "api_query_url": url
-            #     }
-            # )
-
-            # yield TextMessage(text="The generated artifact contains the requested image. Note that the artifact's "
-            #                        "api_query_url returns random images so it should not be considered a location "
-            #                        "or identifier for the image.")
 
         except InstructorRetryException as e:
-            yield TextMessage(text="Sorry, I couldn't find any cat images.")
+            yield TextMessage(text="Sorry, I couldn't find any dataset.")
 
 
 class EDIQueryModel(BaseModel):
@@ -123,17 +129,22 @@ class EDIQueryModel(BaseModel):
     keywords: Optional[str] = Field(None, description="Keyword-based full-text search")
 
     def to_url(self):
-        base_url = "https://pasta.lternet.edu/package/search/eml"
-        if self.scope and self.identifier:
-            url = f"{base_url}/{self.scope}/{self.identifier}"
-        elif self.scope:
-            url = f"{base_url}/{self.scope}"
-        else:
-            url = base_url
+        # base_url = "https://pasta.lternet.edu/package/search/eml?defType=edismax\
+        #             &q=title:sediment+OR+keyword:disturbance&fl=packageid,keyword\
+        #             &sort=score,desc&sort=packageid,asc&debug=false&start=0&rows=1000"
+        url = "https://pasta.lternet.edu/package/search/eml"
 
-        query_params = {}
+        query_params = {
+            "defType": "edismax",
+            "fq": "scope:edi",
+            "fl": "packageid,keyword,title",
+            "sort": "score,desc",
+            "start": 0,
+            "rows": 1000,
+            "debug": "false"
+        }
         if self.keywords:
-            query_params["q"] = self.keywords
+            query_params["q"] = f"keyword:{self.keywords}"
 
         if query_params:
             url += "?" + urlencode(query_params)

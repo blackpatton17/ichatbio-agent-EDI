@@ -18,21 +18,3 @@ class DateRangeValue(BaseModel):
 class BoundingBoxValue(BaseModel):
     left_top: Coordinate
     right_bottom: Coordinate
-
-
-class FilterField(BaseModel):
-    type: Literal["exact", "fulltext", "range", "prefix"]
-    value: Union[str, DateRangeValue, BoundingBoxValue]
-
-
-class SearchFieldIntent(RootModel[Dict[str, Literal["existed", "missing", "prefix"]]]):
-    pass
-
-
-class PASTAQuery(BaseModel):
-    q: Optional[Dict[str, SearchFieldIntent]] = Field(default_factory=dict)
-    fq: Optional[Dict[str, FilterField]] = Field(default_factory=dict)
-    fl: Optional[List[str]] = Field(default_factory=list)
-    rows: Optional[int] = Field(default=10, ge=1)
-    start: Optional[int] = Field(default=0, ge=0)
-    sort: Optional[str] = None

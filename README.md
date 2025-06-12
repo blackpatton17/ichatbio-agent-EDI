@@ -20,5 +20,12 @@ If everything worked, you should be able to find your agent card at http://local
 
 
 test agent
-`PYTHONPATH=src pytest -s tests/test_agent.py`
-test llm `PYTHONPATH=src pytest -s tests/test_prompt_parsing.py`
+```py
+PYTHONPATH=src pytest -s tests/test_agent.py
+```
+
+
+test llm 
+```py
+PYTHONPATH=src pytest -s tests/test_prompt_parsing.py
+```

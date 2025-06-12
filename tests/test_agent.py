@@ -24,6 +24,7 @@ async def test_edi_search_basic():
     summaries = [m.summary for m in messages if isinstance(m, ProcessMessage) and m.summary]
     text = [m.text for m in messages if isinstance(m, TextMessage) and m.text]
     artifacts = [p for p in messages if type(p) is ArtifactMessage]
+    print(summaries, text, artifacts)
 
     assert "Generating EDI query" in summaries
     assert "Query constructed" in summaries

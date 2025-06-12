@@ -73,7 +73,7 @@ class EDIAgent(IChatBioAgent):
 
             yield ProcessMessage(
                 summary="Query constructed",
-                description="Using structured parameters to query EDI",
+                description=f"Using structured parameters to query EDI, url: {url}",
                 data={"search_parameters": edi_query.model_dump(exclude_none=True)}
             )
 

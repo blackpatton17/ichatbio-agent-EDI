@@ -19,7 +19,6 @@ from instructor.exceptions import InstructorRetryException
 from util.ai import StopOnTerminalErrorOrMaxAttempts, AIGenerationException
 from ichatbio.agent import IChatBioAgent
 from ichatbio.types import AgentCard, AgentEntrypoint, ProcessMessage, TextMessage, ArtifactMessage, Message
-from schema import PASTAQuery
 
 dotenv.load_dotenv()
 

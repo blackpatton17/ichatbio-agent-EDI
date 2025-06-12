@@ -91,15 +91,27 @@ class EDIAgent(IChatBioAgent):
         except InstructorRetryException:
             yield TextMessage(text="Sorry, I couldn't find any dataset.")
 
+class SimpleFilterField(BaseModel):
+    type: Literal["exact", "fulltext", "range", "prefix"]
+    value: Union[str, dict]
 
-class EDIQueryModel(PASTAQuery):
+
+class SimplePASTAQuery(BaseModel):
+    q: Optional[Dict[str, Dict[str, Literal["existed", "missing", "prefix"]]]] = Field(default_factory=dict)
+    fq: Optional[Dict[str, SimpleFilterField]] = Field(default_factory=dict)
+    fl: Optional[List[str]] = Field(default_factory=list)
+    rows: Optional[int] = Field(default=10)
+    start: Optional[int] = Field(default=0)
+    sort: Optional[str] = None
+
+class EDIQueryModel(SimplePASTAQuery):
     def to_url(self) -> str:
         base_url = "https://pasta.lternet.edu/package/search/eml"
         params = {}
 
         q_clauses = []
         for field, terms in self.q.items():
-            for term, intent in terms.root.items():
+            for term, intent in terms.items():
                 if intent == "existed":
                     q_clauses.append(f"{field}:{term}")
                 elif intent == "missing":
@@ -133,20 +145,6 @@ class EDIQueryModel(PASTAQuery):
             params["sort"] = self.sort
 
         return f"{base_url}?{urlencode(params, doseq=True)}"
-
-
-class SimpleFilterField(BaseModel):
-    type: Literal["exact", "fulltext", "range", "prefix"]
-    value: Union[str, dict]
-
-
-class SimplePASTAQuery(BaseModel):
-    q: Optional[Dict[str, Dict[str, Literal["existed", "missing", "prefix"]]]] = Field(default_factory=dict)
-    fq: Optional[Dict[str, SimpleFilterField]] = Field(default_factory=dict)
-    fl: Optional[List[str]] = Field(default_factory=list)
-    rows: Optional[int] = Field(default=10)
-    start: Optional[int] = Field(default=0)
-    sort: Optional[str] = None
 
 
 class LLMResponseModel(BaseModel):

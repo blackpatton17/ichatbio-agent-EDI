@@ -39,3 +39,4 @@ async def test_edi_search_basic():
     assert artifact.mimetype == "application/json"
     assert artifact.content is not None
     assert b"datasets" in artifact.content  # optional: verify content includes expected structure
+    print(f"Artifact: {artifact.content}")

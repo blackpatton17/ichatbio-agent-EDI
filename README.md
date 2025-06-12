@@ -17,3 +17,8 @@ python3 src
 ```
 
 If everything worked, you should be able to find your agent card at http://localhost:9999/.well-known/agent.json.
+
+
+test agent
+`PYTHONPATH=src pytest -s tests/test_agent.py`
+test llm `PYTHONPATH=src pytest -s tests/test_prompt_parsing.py`

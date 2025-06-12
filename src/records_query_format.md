@@ -12,7 +12,29 @@ GET https://pasta.lternet.edu/package/search/eml
 
 ---
 
-### 2. Field Categories
+### 2. JSON Query Structure
+
+```json
+{
+  "q": {
+    "<field>": {
+      "<term>": "existed | missing | prefix"
+    }
+  },
+  "fq": {
+    "<field>": {
+      "type": "fulltext | exact | range",
+      "value": "<filter_value>"
+    }
+  },
+  "fl": ["<field1>", "<field2>", ...],
+  "rows": 10
+}
+```
+
+---
+
+### 3. Field Categories
 
 #### Single-Value Fields (used only in `fq`, exact or range match):
 
@@ -45,29 +67,55 @@ GET https://pasta.lternet.edu/package/search/eml
 
 ---
 
-### 3. JSON Query Structure
+### 4. Extended Field Types
 
+#### Temporal Fields (subset of single-value fields)
+- `begindate`
+- `enddate`
+- `singledate`
+- `pubdate`
+
+Use the following structure:
 ```json
-{
-  "q": {
-    "<field>": {
-      "<term>": "existed | missing | prefix"
-    }
-  },
-  "fq": {
-    "<field>": {
-      "type": "fulltext | exact | range",
-      "value": "<filter_value>"
-    }
-  },
-  "fl": ["<field1>", "<field2>", ...],
-  "rows": 10
+"type": "range",
+"value": {
+  "gte": "YYYY-MM-DDTHH:MM:SSZ",
+  "lte": "YYYY-MM-DDTHH:MM:SSZ"
 }
 ```
 
+#### Geographic Fields (subset of multi-value or single-value fields)
+- `geographicdescription`
+- `coordinates`
+- `site`
+
+**`coordinates` field example:**
+```json
+"coordinates": {
+  "type": "range",
+  "value": {
+    "left_top": {
+          "lat": <value>,
+          "lon": <value>
+        },
+    "right_bottom": {
+          "lat": <value>,
+          "lon": <value>
+        }
+  }
+}
+```
+
+Use `fulltext` for `geographicdescription`, and `prefix` for hierarchical names when applicable.
+
+#### Taxonomic Fields
+- `taxonomic`
+
+Use `exact` for known taxa or `prefix` for genus/species patterns.
+
 ---
 
-### 4. Query Semantics
+### 5. Query Semantics
 
 #### `q`
 - Specifies search intent per field.
@@ -80,11 +128,11 @@ GET https://pasta.lternet.edu/package/search/eml
 - Filter queries that constrain results without affecting ranking.
 - Structure includes:
   - `type`: one of `exact`, `fulltext`, or `range`
-  - `value`: string or ISO 8601 range (e.g. `"[2010-01-01T00:00:00Z TO *]"`)
+  - `value`: either a string, a date range with `gte`/`lte`, or bounding box for coordinates
 
 ---
 
-### 5. Example JSON Queries
+### 6. Example JSON Queries
 
 **Example 1: Advanced keyword logic with scope filter**
 
@@ -120,7 +168,10 @@ GET https://pasta.lternet.edu/package/search/eml
   "fq": {
     "pubdate": {
       "type": "range",
-      "value": "[2015-01-01T00:00:00Z TO 2021-12-31T00:00:00Z]"
+      "value": {
+        "gte": "2015-01-01T00:00:00Z",
+        "lte": "2021-12-31T00:00:00Z"
+      }
     },
     "organization": {
       "type": "exact",
@@ -131,11 +182,40 @@ GET https://pasta.lternet.edu/package/search/eml
 }
 ```
 
+**Example 3: Geographic and taxonomic filters**
+
+```json
+{
+  "q": {},
+  "fq": {
+    "coordinates": {
+      "type": "range",
+      "value": {
+        "left_top": {
+          "lat": 45.0,
+          "lon": -125.0
+        },
+        "right_bottom": {
+          "lat": 40.0,
+          "lon": -120.0
+        },
+      }
+    },
+    "taxonomic": {
+      "type": "prefix",
+      "value": "Quercus"
+    }
+  },
+  "fl": ["packageid", "coordinates", "taxonomic"]
+}
+```
+
 ---
 
-### 6. Notes
+### 7. Notes
 
 - `q` terms can support flexible inclusion/exclusion logic per field.
 - `fq` applies strict filtering — each condition must be met.
-- Use `q={}` and rely on `fq` alone for filtering-only queries.
-- The structure allows agents to reason explicitly about what to include, exclude, or prefix-match.
+- `fl` can include any valid field for response filtering.
+- Use `gte`/`lte` format for date and numeric ranges.
+- Use bounding box format for `coordinates` filtering.

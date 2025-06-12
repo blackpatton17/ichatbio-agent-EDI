@@ -1,37 +1,41 @@
-import pytest
 import sys
 import os
+import pytest
 
 from ichatbio.types import ArtifactMessage, ProcessMessage, TextMessage
 
 # Add src/ to Python path to import EDIAgent
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
 
-from agent import EDIAgent, SearchEMLParameters
+from agent import EDIAgent
 
 
 @pytest.mark.asyncio
 async def test_edi_search_basic():
     agent = EDIAgent()
+
+    # Simulate agent query
     response = agent.run(
         "Find me disturbance datasets from EDI",
         "search_dataset",
-        SearchEMLParameters(keywords="disturbance")
+        None
     )
+
+    # Collect messages
     messages = [m async for m in response]
 
-    # Extract process message summaries
+    # Extract components
     summaries = [m.summary for m in messages if isinstance(m, ProcessMessage) and m.summary]
-    text = [m.text for m in messages if isinstance(m, TextMessage) and m.text]
-    artifacts = [p for p in messages if type(p) is ArtifactMessage]
-    print(summaries, text, artifacts)
+    texts = [m.text for m in messages if isinstance(m, TextMessage) and m.text]
+    artifacts = [m for m in messages if isinstance(m, ArtifactMessage)]
 
-    assert "Generating EDI query" in summaries
-    assert "Query constructed" in summaries
-    # assert "URL constructed" in text
+    # Assertions
+    assert any("Generating EDI query" in s for s in summaries)
+    assert any("Query constructed" in s for s in summaries)
     assert len(artifacts) == 1
 
     artifact = artifacts[0]
+    print(f"Artifact url: {artifact.description}")
     assert artifact.mimetype == "application/json"
-    assert artifact.content
-    # assert artifact.metadata == {"api_query_url": "https://cataas.com/cat/sphynx"}
+    assert artifact.content is not None
+    assert b"datasets" in artifact.content  # optional: verify content includes expected structure

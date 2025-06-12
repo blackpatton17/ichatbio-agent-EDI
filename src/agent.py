@@ -1,34 +1,29 @@
 import os
-import urllib.parse
-from typing import Optional, Literal, AsyncGenerator
+from typing import Optional, Literal, AsyncGenerator, Dict, List, Union
 from typing_extensions import override
 from urllib.parse import urlencode
+from pathlib import Path
 
 import dotenv
 import instructor
-import pydantic
 import requests
-from instructor.exceptions import InstructorRetryException
-from openai import AsyncOpenAI
-from pydantic import BaseModel
-from pydantic import Field
-
-from ichatbio.agent import IChatBioAgent
-from ichatbio.types import AgentCard, AgentEntrypoint, ProcessMessage
-from ichatbio.types import Message, TextMessage, ArtifactMessage
 import json
-
 import xml.etree.ElementTree as ET
+from openai import AsyncOpenAI
+from pydantic import Field, BaseModel
+from tenacity import AsyncRetrying
+
+from instructor import AsyncInstructor
+from instructor.exceptions import InstructorRetryException
+
+from util.ai import StopOnTerminalErrorOrMaxAttempts, AIGenerationException
+from ichatbio.agent import IChatBioAgent
+from ichatbio.types import AgentCard, AgentEntrypoint, ProcessMessage, TextMessage, ArtifactMessage, Message
+from schema import PASTAQuery
 
 dotenv.load_dotenv()
 
 EDIResponseFormat = Literal["png", "json"]
-
-
-class SearchEMLParameters(BaseModel):
-    scope: Optional[str] = None
-    identifier: Optional[str] = None
-    keywords: Optional[str] = None  # e.g., full-text search
 
 
 class EDIAgent(IChatBioAgent):
@@ -40,7 +35,7 @@ class EDIAgent(IChatBioAgent):
                 AgentEntrypoint(
                     id="search_dataset",
                     description="Searches EDI for datasets using metadata or keyword search.",
-                    parameters=SearchEMLParameters
+                    parameters=None
                 )
             ]
         )
@@ -51,24 +46,11 @@ class EDIAgent(IChatBioAgent):
 
     @override
     async def run(self, request: str, entrypoint: str, params: Optional[BaseModel]) -> AsyncGenerator[Message, None]:
-        # openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        instructor_client = instructor.patch(openai_client)
-
         try:
             yield ProcessMessage(summary="Generating EDI query", description="Parsing user intent")
 
-            edi_query: EDIQueryModel = await instructor_client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                response_model=EDIQueryModel,
-                messages=[
-                    {"role": "system",
-                    "content": "You translate user requests into query parameters for the PASTA+ EDI Data Package Manager API."},
-                    {"role": "user", "content": request}
-                ],
-                max_retries=3
-            )
-
+            simple_params, description = await _generate_records_search_parameters(request)
+            edi_query = EDIQueryModel(**simple_params.model_dump())
             url = edi_query.to_url()
 
             yield ProcessMessage(
@@ -78,128 +60,144 @@ class EDIAgent(IChatBioAgent):
             )
 
             yield ProcessMessage(description=f"Sending GET request to {url}")
-
             response = requests.get(url)
 
             if response.status_code != 200:
                 yield TextMessage(text=f"Query failed with status code {response.status_code}")
                 return
-            
-            yield ProcessMessage(
-                summary="Datasets retrieved"
-            )
 
             results = response.text.strip()
-
             if not results:
                 yield TextMessage(text="No datasets matched your query.")
             else:
-                entries = []
                 root = ET.fromstring(results)
-                # only take 10 top results
+                entries = []
                 for doc in root.findall("document")[:10]:
                     packageid = doc.findtext("packageid")
                     keywords = [kw.text for kw in doc.findall("keywords/keyword")]
-                    # keywords_str = ", ".join(keywords)
                     title = doc.findtext("title")
-                    # combined = f"{title} \n {keywords_str}".strip()
-                    # entries.append(f"- {packageid}: {combined} \n")
                     entries.append({
                         "packageid": packageid,
                         "title": title,
                         "keywords": keywords
                     })
 
-                # yield TextMessage(text="Top 10 matching dataset found:\n" + "\n".join(entries))
-                # yield TextMessage(text="Top 10 matching dataset")
                 yield ArtifactMessage(
                     mimetype="application/json",
-                    description="Here are the top 10 matching datasets:",
+                    description=f"Here are the top 10 matching datasets from {url}",
                     content=json.dumps({"datasets": entries}).encode("utf-8")
                 )
 
-
-        except InstructorRetryException as e:
+        except InstructorRetryException:
             yield TextMessage(text="Sorry, I couldn't find any dataset.")
 
 
-class EDIQueryModel(BaseModel):
-    scope: Optional[str] = Field(None, description="The data scope (e.g., 'edi', 'knb', etc.)")
-    # identifier: Optional[str] = Field(None, description="Dataset identifier number")
-    keywords: Optional[str] = Field(None, description="Keyword-based full-text search")
+class EDIQueryModel(PASTAQuery):
+    def to_url(self) -> str:
+        base_url = "https://pasta.lternet.edu/package/search/eml"
+        params = {}
 
-    def to_url(self):
-        # base_url = "https://pasta.lternet.edu/package/search/eml?defType=edismax\
-        #             &q=title:sediment+OR+keyword:disturbance&fl=packageid,keyword\
-        #             &sort=score,desc&sort=packageid,asc&debug=false&start=0&rows=1000"
-        url = "https://pasta.lternet.edu/package/search/eml"
+        q_clauses = []
+        for field, terms in self.q.items():
+            for term, intent in terms.root.items():
+                if intent == "existed":
+                    q_clauses.append(f"{field}:{term}")
+                elif intent == "missing":
+                    q_clauses.append(f"-{field}:{term}")
+                elif intent == "prefix":
+                    q_clauses.append(f"{field}:{term}*")
+        params["q"] = " AND ".join(q_clauses) if q_clauses else "*"
 
-        query_params = {
-            "defType": "edismax",
-            "fq": "scope:edi",
-            "fl": "packageid,keyword,title",
-            "sort": "score,desc",
-            "start": 0,
-            "rows": 1000,
-            "debug": "false"
-        }
-        if self.scope:
-            query_params["fq"] = f"scope:{self.scope}"
-        if self.keywords:
-            query_params["q"] = f"keyword:{self.keywords}"
+        fq_list = []
+        for field, filter_obj in self.fq.items():
+            if filter_obj.type == "range":
+                val = filter_obj.value
+                if hasattr(val, "gte") and hasattr(val, "lte"):
+                    fq_list.append(f"{field}:[{val.gte} TO {val.lte}]")
+                elif isinstance(val, dict):
+                    top = val['left_top']
+                    bottom = val['right_bottom']
+                    fq_list.append(f"{field}:[{top['lat']},{top['lon']} TO {bottom['lat']},{bottom['lon']}]")
+            else:
+                fq_list.append(f"{field}:{filter_obj.value}")
+        if fq_list:
+            params["fq"] = fq_list
 
-        if query_params:
-            url += "?" + urlencode(query_params)
+        if self.fl:
+            params["fl"] = ",".join(self.fl)
+        if self.rows:
+            params["rows"] = str(self.rows)
+        if self.start:
+            params["start"] = str(self.start)
+        if self.sort:
+            params["sort"] = self.sort
 
-        return url
-
-COLORS = Literal[
-    "white", "lightgray", "gray", "black", "red", "orange", "yellow", "green", "blue", "indigo", "violet", "pink"]
-
-
-class MessageModel(BaseModel):
-    """Parameters for adding messages to images."""
-
-    text: str = Field(description="Text to add to the picture.")
-    font_size: Optional[int] = Field(None,
-                                     description="Font size to use for the added text. Default is 50. 10 is barely readable. 200 might not fit on the picture.")
-    font_color: Optional[COLORS] = Field(None, description="Font color to use for the added text. Default is white.",
-                                         examples=["red", "green", "yellow", "pink", "gray"])
-
-    @pydantic.field_validator("font_size")
-    @classmethod
-    def validate_font_size(cls, v):
-        if v <= 0:
-            raise ValueError("font_size must be positive")
-        return v
+        return f"{base_url}?{urlencode(params, doseq=True)}"
 
 
-# class CatModel(BaseModel):
-#     """API parameters for https://cataas.com."""
+class SimpleFilterField(BaseModel):
+    type: Literal["exact", "fulltext", "range", "prefix"]
+    value: Union[str, dict]
 
-#     tags: Optional[list[str]] = Field(None,
-#                                       description="One-word tags that describe the cat image to return. Leave blank to get any kind of cat picture.",
-#                                       examples=[["orange"], ["calico", "sleeping"]])
-#     message: Optional[MessageModel] = Field(None, description="Text to add to the picture.")
 
-#     def to_url(self, format: CataasResponseFormat):
-#         url = "https://cataas.com/cat"
-#         params = {}
+class SimplePASTAQuery(BaseModel):
+    q: Optional[Dict[str, Dict[str, Literal["existed", "missing", "prefix"]]]] = Field(default_factory=dict)
+    fq: Optional[Dict[str, SimpleFilterField]] = Field(default_factory=dict)
+    fl: Optional[List[str]] = Field(default_factory=list)
+    rows: Optional[int] = Field(default=10)
+    start: Optional[int] = Field(default=0)
+    sort: Optional[str] = None
 
-#         if format == "json":
-#             params |= {"json": True}
 
-#         if self.tags:
-#             url += "/" + ",".join(self.tags)
+class LLMResponseModel(BaseModel):
+    plan: str = Field(description="A brief explanation of what API parameters you plan to use")
+    search_parameters: SimplePASTAQuery = Field()
+    artifact_description: str = Field(description="A concise characterization of the retrieved occurrence record data")
 
-#         if self.message:
-#             url += f"/says/" + urllib.parse.quote(self.message.text)
-#             if self.message.font_size:
-#                 params |= {"fontSize": self.message.font_size}
-#             if self.message.font_color:
-#                 params |= {"fontColor": self.message.font_color}
 
-#         if params:
-#             url += "?" + urlencode(params)
+async def _generate_records_search_parameters(request: str) -> (SimplePASTAQuery, str):
+    client: AsyncInstructor = instructor.from_openai(AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY")))
 
-#         return url
+    try:
+        result = await client.chat.completions.create(
+            model="gpt-4.1",
+            temperature=0,
+            response_model=LLMResponseModel,
+            messages=[
+                {"role": "system", "content": get_system_prompt()},
+                {"role": "user", "content": request}
+            ],
+        )
+    except InstructorRetryException as e:
+        raise AIGenerationException(e)
+
+    return result.search_parameters, result.artifact_description
+
+
+SYSTEM_PROMPT_TEMPLATE = """
+You translate user requests into parameters for the iDigBio record search API.
+
+# Query format
+
+Here is a description of how iDigBio queries are formatted:
+
+[BEGIN QUERY FORMAT DOC]
+
+{query_format_doc}
+
+[END QUERY FORMAT DOC]
+
+# Examples
+
+{examples_doc}
+"""
+
+def get_system_prompt():
+    base = Path(__file__).parent / "resources"
+    query_format_doc = (base / "records_query_format.md").read_text(encoding="utf-8")
+    examples_doc = (base / "records_examples.md").read_text(encoding="utf-8")
+
+    return SYSTEM_PROMPT_TEMPLATE.format(
+        query_format_doc=query_format_doc,
+        examples_doc=examples_doc
+    ).strip()

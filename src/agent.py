@@ -34,8 +34,9 @@ class EDIAgent(IChatBioAgent):
                 AgentEntrypoint(
                     id="search_dataset",
                     description="Searches EDI for datasets using metadata or keyword search.",
-                    parameters=None
-                )
+                    parameters=None,
+                    icon=None
+		)
             ]
         )
 

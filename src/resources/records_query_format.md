@@ -27,8 +27,7 @@ GET https://pasta.lternet.edu/package/search/eml
       "value": "<filter_value>"
     }
   },
-  "fl": ["<field1>", "<field2>", ...],
-  "rows": 10
+  "fl": ["<field1>", "<field2>", ...]
 }
 ```
 
@@ -151,8 +150,7 @@ Use `exact` for known taxa or `prefix` for genus/species patterns.
       "value": "edi"
     }
   },
-  "fl": ["packageid", "doi", "keyword"],
-  "rows": 10
+  "fl": ["packageid", "doi", "keyword"]
 }
 ```
 

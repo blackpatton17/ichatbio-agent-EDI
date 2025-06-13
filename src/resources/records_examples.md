@@ -19,7 +19,7 @@ This document provides simple examples of JSON queries formatted for use with th
     }
   },
   "fl": ["packageid", "keyword"],
-  "rows": 5
+  "rows": 1000
 }
 ```
 
@@ -33,7 +33,7 @@ This document provides simple examples of JSON queries formatted for use with th
     }
   },
   "fl": ["packageid", "keyword"],
-  "rows": 3
+  "rows": 1000
 }
 ```
 
@@ -55,7 +55,7 @@ This document provides simple examples of JSON queries formatted for use with th
     }
   },
   "fl": ["packageid", "author", "pubdate"],
-  "rows": 10
+  "rows": 1000
 }
 ```
 

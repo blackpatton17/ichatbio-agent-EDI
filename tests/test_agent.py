@@ -16,7 +16,7 @@ async def test_edi_search_basic():
 
     # Simulate agent query
     response = agent.run(
-        "Find me disturbance datasets from EDI",
+        "Find me 500 disturbance datasets from EDI",
         "search_dataset",
         None
     )

@@ -99,7 +99,7 @@ class SimplePASTAQuery(BaseModel):
     q: Optional[Dict[str, Dict[str, Literal["existed", "missing", "prefix"]]]] = Field(default_factory=dict)
     fq: Optional[Dict[str, SimpleFilterField]] = Field(default_factory=dict)
     fl: Optional[List[str]] = Field(default_factory=list)
-    rows: Optional[int] = Field(default=10)
+    rows: Optional[int] = Field(default=1000)
     start: Optional[int] = Field(default=0)
     sort: Optional[str] = None
 

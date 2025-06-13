@@ -30,12 +30,12 @@ class EDIAgent(IChatBioAgent):
         self.agent_card = AgentCard(
             name="EDI Dataset Agent",
             description="Searches datasets from PASTA+ EDI repository.",
+            icon=None,
             entrypoints=[
                 AgentEntrypoint(
                     id="search_dataset",
                     description="Searches EDI for datasets using metadata or keyword search.",
                     parameters=None,
-                    icon=None
 		)
             ]
         )

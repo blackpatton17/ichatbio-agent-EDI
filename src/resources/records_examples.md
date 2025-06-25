@@ -2,9 +2,30 @@
 
 This document provides simple examples of JSON queries formatted for use with the PASTA+ EML search API. Each example demonstrates a specific type of filter or query logic to help guide development.
 
+Note: unless the user delcare to search something in a specific field, e.g.  `keyword`, put the search clause term in `uncategorized` field to allow a non-strict search. However, there is no `uncategorized` allowed in the `fq` field allowed yet.
+
 ---
 
 ### Example 1: Keyword match and scope filter
+```json
+{
+  "q": {
+    "uncategorized": {
+      "Castor canadensis": "existed"
+    }
+  },
+  "fq": {
+    "scope": {
+      "type": "exact",
+      "value": "edi"
+    }
+  },
+  "fl": ["packageid", "keyword"],
+  "rows": 1000
+}
+```
+
+### Example 2: Keyword match and scope filter
 ```json
 {
   "q": {
@@ -23,7 +44,7 @@ This document provides simple examples of JSON queries formatted for use with th
 }
 ```
 
-### Example 2: Missing keyword and prefix match
+### Example 3: Missing keyword and prefix match
 ```json
 {
   "q": {
@@ -37,7 +58,7 @@ This document provides simple examples of JSON queries formatted for use with th
 }
 ```
 
-### Example 3: Author presence and date range
+### Example 4: Author presence and date range
 ```json
 {
   "q": {
@@ -59,7 +80,7 @@ This document provides simple examples of JSON queries formatted for use with th
 }
 ```
 
-### Example 4: Coordinate bounding box
+### Example 5: Coordinate bounding box
 ```json
 {
   "q": {},
@@ -77,7 +98,7 @@ This document provides simple examples of JSON queries formatted for use with th
 }
 ```
 
-### Example 5: Taxonomic and geographic description prefix
+### Example 6: Taxonomic and geographic description prefix
 ```json
 {
   "q": {

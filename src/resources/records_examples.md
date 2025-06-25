@@ -6,7 +6,7 @@ Note: unless the user delcare to search something in a specific field, e.g.  `ke
 
 ---
 
-### Example 1: Keyword match and scope filter
+### Example 1: Basic search in EDI scope
 ```json
 {
   "q": {

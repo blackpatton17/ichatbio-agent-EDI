@@ -73,19 +73,44 @@ class EDIAgent(IChatBioAgent):
                 root = ET.fromstring(results)
                 entries = []
                 for doc in root.findall("document")[:10]:
-                    packageid = doc.findtext("packageid")
-                    keywords = [kw.text for kw in doc.findall("keywords/keyword")]
-                    title = doc.findtext("title")
-                    entries.append({
-                        "packageid": packageid,
-                        "title": title,
-                        "keywords": keywords
-                    })
+                    entry = {}
+                    for child in doc:
+                        # If the child has sub-elements, handle as list or dict
+                        if list(child):
+                            # If all sub-elements are <keyword>, collect as list
+                            if all(grandchild.tag == "keyword" for grandchild in child):
+                                entry[child.tag] = [kw.text for kw in child.findall("keyword")]
+                            else:
+                                # For other nested structures, store as dict
+                                entry[child.tag] = {grandchild.tag: grandchild.text for grandchild in child}
+                        else:
+                            entry[child.tag] = child.text
+                    # Add a URL field if packageid exists
+                    if "packageid" in entry:
+                        # Convert packageid from "scope.id.revision" to "scope/id/revision"
+                        scope, id_, revision = entry["packageid"].split(".")
+                        entry["url"] = f"https://pasta.lternet.edu/package/metadata/eml/{scope}/{id_}/{revision}"
+                    entries.append(entry)
+
+                # summary = await _generate_records_summary(entries)
+                # yield TextMessage(
+                #     text=f"Found {len(entries)} datasets matching your query. " \
+                #          f"Top 10 datasets are included in the artifact. Summary: {summary}"
+                # )
 
                 yield ArtifactMessage(
                     mimetype="application/json",
                     description=f"Here are the top 10 matching datasets from {url}",
                     content=json.dumps({"datasets": entries}).encode("utf-8")
+                )
+                # Save the entries to a local JSON file
+                output_path = Path(os.getenv("EDI_RESULTS_PATH", "edi_search_results.json"))
+                with output_path.open("w", encoding="utf-8") as f:
+                    json.dump({"datasets": entries}, f, ensure_ascii=False, indent=2)
+                yield ProcessMessage(
+                    summary="Results saved locally",
+                    description=f"Saved the top 10 datasets to {output_path.resolve()}",
+                    data={"output_path": str(output_path.resolve())}
                 )
 
         except InstructorRetryException:
@@ -125,7 +150,7 @@ class EDIQueryModel(SimplePASTAQuery):
                 # Append using the appropriate pattern
                 q_clauses.append(intent_map[intent].format(field=field, term=quoted_term))
 
-        params["q"] = " ".join(q_clauses) if q_clauses else "*"
+        params["q"] = "+".join(q_clauses) if q_clauses else "*"
 
         fq_list = []
         for field, filter_obj in self.fq.items():
@@ -151,7 +176,15 @@ class EDIQueryModel(SimplePASTAQuery):
         if self.sort:
             params["sort"] = self.sort
 
-        return f"{base_url}?{urlencode(params, doseq=True)}"
+        query_parts = []
+        for param_key, param_value in params.items():
+            if isinstance(param_value, list):
+                for item in param_value:
+                    query_parts.append(f"{param_key}={item}")
+            else:
+                query_parts.append(f"{param_key}={param_value}")
+        return f"{base_url}?" + "&".join(query_parts)
+
 
 
 class LLMResponseModel(BaseModel):
@@ -171,6 +204,25 @@ async def _generate_records_search_parameters(request: str) -> (SimplePASTAQuery
             messages=[
                 {"role": "system", "content": get_system_prompt()},
                 {"role": "user", "content": request}
+            ],
+        )
+    except InstructorRetryException as e:
+        raise AIGenerationException(e)
+
+    return result.search_parameters, result.artifact_description
+
+async def _generate_records_summary(artifact: dict) -> str:
+    """Generate a summary of the EDI dataset artifact."""
+    client: AsyncInstructor = instructor.from_openai(AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY")))
+
+    try:
+        result = await client.chat.completions.create(
+            model="gpt-4.1",
+            temperature=0,
+            response_model=LLMResponseModel,
+            messages=[
+                {"role": "system", "content": "You summarize EDI dataset artifacts."},
+                {"role": "user", "content": json.dumps(artifact)},
             ],
         )
     except InstructorRetryException as e:

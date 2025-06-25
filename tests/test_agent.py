@@ -16,7 +16,7 @@ async def test_edi_search_basic():
 
     # Simulate agent query
     response = agent.run(
-        "Find me 500 disturbance datasets from EDI",
+        "Retrieve datasets with atmospheric CO₂ concentrations and air temperature readings in the Andrews Forest with scope of knb-lter-and.",
         "search_dataset",
         None
     )

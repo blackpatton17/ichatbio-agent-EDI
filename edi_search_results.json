@@ -1,0 +1,154 @@
+{
+  "datasets": [
+    {
+      "packageid": "knb-lter-and.3169.7",
+      "title": "Chemical and microbiological properties of soils in the Andrews Experimental Forest (1994 REU Study)",
+      "keywords": [
+        "Air temperature",
+        "Long-Term Ecological Research (LTER)",
+        "Microbiota",
+        "Nitrogen",
+        "Respiration",
+        "Soil chemistry",
+        "Inorganic nutrients"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/3169/7"
+    },
+    {
+      "packageid": "knb-lter-and.5329.1",
+      "title": "Record of Public Communications at the HJ Andrews Experimental Forest (1980-2002)",
+      "keywords": [
+        "'New Forestry'/New Perspectives",
+        "Attitudes/perceptions",
+        "Forest management",
+        "Forest policy",
+        "Human dimension",
+        "Resource management",
+        "Timber management"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/5329/1"
+    },
+    {
+      "packageid": "knb-lter-and.11856.2",
+      "title": "Oral history transcripts from the H.J. Andrews Experimental Forest Program, 1996 to 2018",
+      "keywords": [
+        "history",
+        "historical value",
+        "forest ecosystems",
+        "H. J. Andrews Experimental Forest (AND)",
+        "Long-Term Ecological Research (LTER)",
+        "attitudes and perceptions",
+        "public participation",
+        "experimental forests"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/11856/2"
+    },
+    {
+      "packageid": "knb-lter-and.11756.2",
+      "title": "Historical Records of the H.J. Andrews Experimental Forest Program, 1947 to\n      present",
+      "keywords": [
+        "history",
+        "Adaptive Management Areas (AMA)",
+        "Cascade Center for Ecosystem Management (CCEM)",
+        "Long-Term Ecological Research (LTER)",
+        "International Biological Program (IBP)",
+        "Research Natural Areas (RNA)",
+        "information management"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/11756/2"
+    },
+    {
+      "packageid": "knb-lter-and.2726.6",
+      "title": "Mammal species list of the Andrews Experimental Forest, 1971 to 1976",
+      "keywords": [
+        "Long-Term Ecological Research (LTER)",
+        "Mammals",
+        "Old-growth forests",
+        "Populations",
+        "Vertebrates"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/2726/6"
+    },
+    {
+      "packageid": "knb-lter-and.4009.5",
+      "title": "Plant community typing (2009 update), Andrews Experimental Forest",
+      "keywords": [
+        "Ecology",
+        "Plant associations",
+        "Vegetation"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/4009/5"
+    },
+    {
+      "packageid": "knb-lter-and.5489.5",
+      "title": "Water stable isotopes for streams and precipitation samples in the HJ Andrews Experimental Forest, 2014-2023",
+      "keywords": [
+        "droughts",
+        "tracers",
+        "disturbance",
+        "streamflow",
+        "stable isotopes",
+        "streams",
+        "water samples",
+        "disturbance"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/5489/5"
+    },
+    {
+      "packageid": "knb-lter-and.3993.5",
+      "title": "Average monthly and annual precipitation spatial grids. (1971-2000 and 1980-1989), Andrews Experimental Forest",
+      "keywords": [
+        "Climate data",
+        "Climate modeling",
+        "Climate/Meteorology",
+        "Meteorological measurements",
+        "Precipitation",
+        "Precipitation modeling"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/3993/5"
+    },
+    {
+      "packageid": "knb-lter-and.4789.6",
+      "title": "Stream nutrient sampling during winter baseflow conditions in the Andrews Forest and Willamette River Basin, February 2009",
+      "keywords": [
+        "Aquatic decomposition",
+        "Carbon cycling",
+        "Flood processes",
+        "Human history",
+        "Hydrology data",
+        "Nitrogen cycling",
+        "Organic matter",
+        "Productivity",
+        "Secondary production",
+        "Surface water",
+        "Variability, spatial",
+        "Water chemistry",
+        "Biogeochemistry",
+        "Land ownership"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/4789/6"
+    },
+    {
+      "packageid": "knb-lter-and.3982.7",
+      "title": "Spot fire locations (1991), Andrews Experimental Forest",
+      "keywords": [
+        "Disturbance",
+        "Disturbance",
+        "Disturbance history",
+        "Fire",
+        "Forest management"
+      ],
+      "scope": "knb-lter-and",
+      "url": "https://pasta.lternet.edu/package/metadata/eml/knb-lter-and/3982/7"
+    }
+  ]
+}

@@ -111,14 +111,29 @@ class EDIQueryModel(SimplePASTAQuery):
 
         q_clauses = []
         for field, terms in self.q.items():
-            for term, intent in terms.items():
-                if intent == "existed":
-                    q_clauses.append(f"{field}:{term}")
-                elif intent == "missing":
-                    q_clauses.append(f"-{field}:{term}")
-                elif intent == "prefix":
-                    q_clauses.append(f"{field}:{term}*")
-        params["q"] = " AND ".join(q_clauses) if q_clauses else "*"
+            if field == "uncategorized":
+                for term, intent in terms.items():
+                    term_clauses = term
+                    if " " in term:
+                        term_clauses = f"\"{term}\""
+                    if intent == "existed":
+                        q_clauses.append(f"{term}")
+                    elif intent == "missing":
+                        q_clauses.append(f"-{term}")
+                    elif intent == "prefix":
+                        q_clauses.append(f"{term}*")
+            else:
+                for term, intent in terms.items():
+                    term_clauses = term
+                    if " " in term:
+                        term_clauses = f"\"{term}\""
+                    if intent == "existed":
+                        q_clauses.append(f"{field}:{term}")
+                    elif intent == "missing":
+                        q_clauses.append(f"-{field}:{term}")
+                    elif intent == "prefix":
+                        q_clauses.append(f"{field}:{term}*")
+        params["q"] = " ".join(q_clauses) if q_clauses else "*"
 
         fq_list = []
         for field, filter_obj in self.fq.items():

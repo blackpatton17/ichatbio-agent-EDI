@@ -48,7 +48,7 @@ GET https://pasta.lternet.edu/package/search/eml
 - `packageid`
 - `pubdate`
 - `responsibleParties`
-- `scope`
+- `scope` by default, if user doesn't claim the scope, use EDI
 - `singledate`
 - `site`
 - `taxonomic`
@@ -132,9 +132,31 @@ Use `exact` for known taxa or `prefix` for genus/species patterns.
 ---
 
 ### 6. Example JSON Queries
+Note: User may enter some specific phrase in their request, so if they do so, substitute that phrase into the q filter.
 
-**Example 1: Advanced keyword logic with scope filter**
+**Example 1: Basic word searching**
+Request: Show me the methods used in Meteorological data from the Discovery Tree at the Andrews Experimental Forest. 
+```json
+{
+  "q": {
+    "uncategorized": {
+      "Meteorological": "existed",
+      "Andrews Experimental": "existed",
+      "Discovery Tree": "existed"
+    }
+  },
+  "fq": {
+    "scope": {
+      "type": "fulltext",
+      "value": "edi"
+    }
+  },
+  "fl": ["*"]
+}
+```
 
+**Example 2: Advanced keyword logic with scope filter**
+Request: Show me datasets containing the keyword “fire,” missing the keyword “rainforest,” and where the keyword “mash” matches as a prefix.
 ```json
 {
   "q": {
@@ -154,8 +176,8 @@ Use `exact` for known taxa or `prefix` for genus/species patterns.
 }
 ```
 
-**Example 2: Publication date range and organization filter**
-
+**Example 3: Publication date range and organization filter**
+Request: Find all datasets by the author “smith,” published between January 1, 2015 and December 31, 2021, from the LTER organization.
 ```json
 {
   "q": {
@@ -180,8 +202,8 @@ Use `exact` for known taxa or `prefix` for genus/species patterns.
 }
 ```
 
-**Example 3: Geographic and taxonomic filters**
-
+**Example 4: Geographic and taxonomic filters**
+Request: Get all datasets for observations within a geographic box spanning latitudes 45.0 to 40.0 and longitudes -125.0 to -120.0 that involve taxa starting with “Quercus.”
 ```json
 {
   "q": {},

@@ -110,29 +110,21 @@ class EDIQueryModel(SimplePASTAQuery):
         params = {}
 
         q_clauses = []
-        for field, terms in self.q.items():
-            if field == "uncategorized":
-                for term, intent in terms.items():
-                    term_clauses = term
-                    if " " in term:
-                        term_clauses = f"\"{term}\""
-                    if intent == "existed":
-                        q_clauses.append(f"{term}")
-                    elif intent == "missing":
-                        q_clauses.append(f"-{term}")
-                    elif intent == "prefix":
-                        q_clauses.append(f"{term}*")
-            else:
-                for term, intent in terms.items():
-                    term_clauses = term
-                    if " " in term:
-                        term_clauses = f"\"{term}\""
-                    if intent == "existed":
-                        q_clauses.append(f"{field}:{term}")
-                    elif intent == "missing":
-                        q_clauses.append(f"-{field}:{term}")
-                    elif intent == "prefix":
-                        q_clauses.append(f"{field}:{term}*")
+        intent_map = {
+            "existed": "{field}{term}",
+            "missing": "-{field}{term}",
+            "prefix": "{field}{term}*",
+        }
+
+        for field_name, terms in self.q.items():
+            for term, intent in terms.items():
+                # Quote term if it contains spaces
+                quoted_term = f"\"{term}\"" if " " in term else term
+                # Compute the field part of the clause
+                field = f"{field_name}:" if field_name != "uncategorized" else ""
+                # Append using the appropriate pattern
+                q_clauses.append(intent_map[intent].format(field=field, term=quoted_term))
+
         params["q"] = " ".join(q_clauses) if q_clauses else "*"
 
         fq_list = []

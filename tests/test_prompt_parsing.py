@@ -6,7 +6,8 @@ from agent import _generate_records_search_parameters, SimplePASTAQuery
 
 @pytest.mark.asyncio
 async def test_generate_search_parameters_from_prompt():
-    request = "Show me the sampling protocols used in vegetation plots at the Blue River site of the Andrews Experimental Forest."
+    request = "Retrieve datasets with atmospheric CO₂ concentrations and air temperature readings in the Andrews Forest with scope of knb-lter-and. " \
+        "I also need the abstract and methods in the result",
     search_params, artifact_description = await _generate_records_search_parameters(request)
 
     assert isinstance(search_params, SimplePASTAQuery), "search_parameters should be a SimplePASTAQuery instance"

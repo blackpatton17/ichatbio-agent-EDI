@@ -16,7 +16,8 @@ async def test_edi_search_basic():
 
     # Simulate agent query
     response = agent.run(
-        "Retrieve datasets with atmospheric CO₂ concentrations and air temperature readings in the Andrews Forest with scope of knb-lter-and.",
+        "Retrieve datasets with atmospheric CO₂ concentrations and air temperature readings in the Andrews Forest with scope of knb-lter-and. " \
+        "I also need the abstract and methods in the result",
         "search_dataset",
         None
     )

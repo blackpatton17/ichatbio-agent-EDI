@@ -15,16 +15,17 @@ async def test_edi_search_basic(context, messages):
     agent = EDIAgent()
 
     # Simulate agent query
-    response = agent.run(
+    response = await agent.run(
         context,
-        "Retrieve datasets with atmospheric carbon dioxide concentrations and air temperature readings in the Andrews Forest with scope of knb-lter-and. " \
+        "Retrieve datasets with atmospheric carbon dioxide concentrations and air"
+        " temperature readings in the Andrews Forest with scope of knb-lter-and. "
         "I also need the abstract and methods in the result",
         "search_dataset",
         None
     )
 
     # Collect messages
-    messages: list[DirectResponse | ProcessBeginResponse | ProcessLogResponse | ArtifactResponse]
+    print(f"Messages: {messages}")
 
     # # Extract components
     # summaries = [m.summary for m in messages if isinstance(m, ProcessMessage) and m.summary]

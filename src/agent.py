@@ -46,7 +46,7 @@ class EDIAgent(IChatBioAgent):
         return self.agent_card
 
     @override
-    async def run(self, request: str, entrypoint: str, params: Optional[BaseModel]):
+    async def run(self, context: ResponseContext, request: str, entrypoint: str, params: Optional[BaseModel]):
         async with context.begin_process(summary="Generating EDI query") as process:
             simple_params, description = await _generate_records_search_parameters(request)
             edi_query = EDIQueryModel(**simple_params.model_dump())
@@ -55,7 +55,7 @@ class EDIAgent(IChatBioAgent):
             await process.log(f"Using structured parameters to query EDI, url: {url}")
 
             await process.log(f"Sending GET request to {url}")
-            response = await self._fetch_edi_data(url)
+            response = await _fetch_edi_data(url)
 
             if response.status_code != 200:
                 raise AIGenerationException(f"Failed to fetch data from EDI: {response.status_code} {response.text}")
@@ -182,6 +182,21 @@ class LLMResponseModel(BaseModel):
     search_parameters: SimplePASTAQuery = Field()
     artifact_description: str = Field(description="A concise characterization of the retrieved occurrence record data")
 
+async def _fetch_edi_data(url: str) -> requests.Response:
+    """
+    Fetch data from the EDI repository using the provided URL.
+    This function uses a retry mechanism to handle transient errors.
+    """
+    async for attempt in AsyncRetrying(
+        stop=StopOnTerminalErrorOrMaxAttempts(max_attempts=3),
+        reraise=True,
+        retry_error_cls=AIGenerationException
+    ):
+        with attempt:
+            response = requests.get(url)
+            if response.status_code != 200:
+                raise AIGenerationException(f"Failed to fetch data from EDI: {response.status_code} {response.text}")
+            return response
 
 async def _generate_records_search_parameters(request: str) -> (SimplePASTAQuery, str):
     client: AsyncInstructor = instructor.from_openai(AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY")))

@@ -16,10 +16,11 @@ from tenacity import AsyncRetrying
 from instructor import AsyncInstructor
 from instructor.exceptions import InstructorRetryException
 
-from util.ai import StopOnTerminalErrorOrMaxAttempts, AIGenerationException
 from ichatbio.agent import IChatBioAgent
 from ichatbio.types import AgentCard, AgentEntrypoint
 from ichatbio.agent_response import ResponseContext
+
+from entrypoints import record_query
 
 dotenv.load_dotenv()
 
@@ -33,11 +34,7 @@ class EDIAgent(IChatBioAgent):
             description="Searches datasets from PASTA+ EDI repository.",
             icon=None,
             entrypoints=[
-                AgentEntrypoint(
-                    id="search_dataset",
-                    description="Searches EDI for datasets using metadata or keyword search.",
-                    parameters=None,
-		        )
+                record_query.entrypoint
             ]
         )
 
@@ -48,8 +45,8 @@ class EDIAgent(IChatBioAgent):
     @override
     async def run(self, context: ResponseContext, request: str, entrypoint: str, params: Optional[BaseModel]):
         async with context.begin_process(summary="Generating EDI query") as process:
-            simple_params, description = await _generate_records_search_parameters(request)
-            edi_query = EDIQueryModel(**simple_params.model_dump())
+            params, description = await _generate_records_search_parameters(request)
+            edi_query = EDIQueryModel(**params.model_dump())
             url = edi_query.to_url()
 
             await process.log(f"Using structured parameters to query EDI, url: {url}")
@@ -106,20 +103,20 @@ class EDIAgent(IChatBioAgent):
             #     json.dump({"datasets": entries}, f, ensure_ascii=False, indent=2)
 
 
-class SimpleFilterField(BaseModel):
+class FilterField(BaseModel):
     type: Literal["exact", "fulltext", "range", "prefix"]
     value: Union[str, dict]
 
 
-class SimplePASTAQuery(BaseModel):
+class PASTAQuery(BaseModel):
     q: Optional[Dict[str, Dict[str, Literal["existed", "missing", "prefix"]]]] = Field(default_factory=dict)
-    fq: Optional[Dict[str, SimpleFilterField]] = Field(default_factory=dict)
+    fq: Optional[Dict[str, FilterField]] = Field(default_factory=dict)
     fl: Optional[List[str]] = Field(default_factory=list)
     rows: Optional[int] = Field(default=1000)
     start: Optional[int] = Field(default=0)
     sort: Optional[str] = None
 
-class EDIQueryModel(SimplePASTAQuery):
+class EDIQueryModel(PASTAQuery):
     def to_url(self) -> str:
         base_url = "https://pasta.lternet.edu/package/search/eml"
         params = {}
@@ -179,7 +176,7 @@ class EDIQueryModel(SimplePASTAQuery):
 
 class LLMResponseModel(BaseModel):
     plan: str = Field(description="A brief explanation of what API parameters you plan to use")
-    search_parameters: SimplePASTAQuery = Field()
+    search_parameters: PASTAQuery = Field()
     artifact_description: str = Field(description="A concise characterization of the retrieved occurrence record data")
 
 async def _fetch_edi_data(url: str) -> requests.Response:
@@ -198,7 +195,7 @@ async def _fetch_edi_data(url: str) -> requests.Response:
                 raise AIGenerationException(f"Failed to fetch data from EDI: {response.status_code} {response.text}")
             return response
 
-async def _generate_records_search_parameters(request: str) -> (SimplePASTAQuery, str):
+async def _generate_records_search_parameters(request: str) -> (PASTAQuery, str):
     client: AsyncInstructor = instructor.from_openai(AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY")))
 
     try:

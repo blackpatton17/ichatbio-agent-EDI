@@ -74,11 +74,11 @@ async def run(self, context: ResponseContext, request: str):
                 entry["url"] = f"https://pasta.lternet.edu/package/metadata/eml/{scope}/{id_}/{revision}"
             entries.append(entry)
 
-        # await context.reply(
-        #     "Results saved locally"
-        #     # description=f"Saved the top 10 datasets to {output_path.resolve()}",
-        #     # data={"output_path": str(output_path.resolve())}
-        # )
+        await context.reply(
+            f"Results found at URL: {url}",
+            # description=f"Saved the top 10 datasets to {output_path.resolve()}",
+            # data={"output_path": str(output_path.resolve())}
+        )
         # # Save the entries to a local JSON file
         # output_path = Path(os.getenv("EDI_RESULTS_PATH", "edi_search_results.json"))
         # # Write the file in text mode first (if needed), then reopen in binary mode for upload

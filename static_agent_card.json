@@ -1,0 +1,26 @@
+{
+    "capabilities": {
+        "streaming": true
+    },
+    "defaultInputModes": [
+        "text/plain"
+    ],
+    "defaultOutputModes": [
+        "text/plain"
+    ],
+    "description": "Searches datasets from PASTA+ EDI repository.",
+    "name": "EDI Dataset Agent",
+    "protocolVersion": "0.2.5",
+    "skills": [
+        {
+            "description": "{\"description\": \"Searches EDI for datasets using metadata or keyword search.\"}",
+            "id": "search_dataset",
+            "name": "search_dataset",
+            "tags": [
+                "ichatbio"
+            ]
+        }
+    ],
+    "url": "None",
+    "version": "1"
+}

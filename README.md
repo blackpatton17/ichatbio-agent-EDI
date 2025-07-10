@@ -16,7 +16,7 @@ pip3 install -r requirements.txt
 python3 src
 ```
 
-If everything worked, you should be able to find your agent card at http://localhost:9999/.well-known/agent.json.
+If everything worked, you should be able to find your agent card at http://localhost:8000/.well-known/agent.json.
 
 Add OPENAI_API_KEY to env
 ```sh
@@ -34,3 +34,5 @@ test llm
 ```py
 PYTHONPATH=src pytest -s tests/test_prompt_parsing.py
 ```
+
+ Command to run docker container in `run.sh`

@@ -89,7 +89,10 @@ class EDIQueryModel(PASTAQuery):
                 query_parts.append(f"{param_key}={param_value}")
         return f"{base_url}?" + "&".join(query_parts)
 
-class LLMResponseModel(BaseModel):
+class LLMQueryParamResponseModel(BaseModel):
     plan: str = Field(description="A brief explanation of what API parameters you plan to use")
     search_parameters: PASTAQuery = Field()
     artifact_description: str = Field(description="A concise characterization of the retrieved occurrence record data")
+
+class LLMSummarizationResponseModel(BaseModel):
+    summary: str = Field(description="A summary of the retrieved occurrence record data")

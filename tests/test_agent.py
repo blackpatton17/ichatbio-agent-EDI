@@ -16,7 +16,7 @@ async def test_edi_search_basic(context, messages):
     response = await agent.run(
         context,
         "Retrieve datasets with atmospheric carbon dioxide concentrations and air"
-        " temperature readings in the Andrews Forest with scope of knb-lter-and. "
+        " temperature readings in the Andrews Forest. "
         "I also need the abstract and methods in the result",
         "search_dataset",
         None

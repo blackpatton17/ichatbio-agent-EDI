@@ -48,7 +48,9 @@ GET https://pasta.lternet.edu/package/search/eml
 - `packageid`
 - `pubdate`
 - `responsibleParties`
-- `scope` by default, if user doesn't claim the scope, use EDI
+- `scope`  
+  - By default, if the user does not specify a scope, use `edi` in the query to indicate datasets submitted directly to EDI.  
+  - For data belonging to a specific data collection site (e.g., Andrews Forest), use the corresponding `scope` value from the reference list at the end of this document.
 - `singledate`
 - `site`
 - `taxonomic`
@@ -239,3 +241,42 @@ Request: Get all datasets for observations within a geographic box spanning lati
 - `fl` can include any valid field for response filtering.
 - Use `gte`/`lte` format for date and numeric ranges.
 - Use bounding box format for `coordinates` filtering.
+
+## Available `scope` Site List
+
+The following is a list of available `scope` values for use in queries, each pair is an available long term ecological research site:
+
+- Andrews Forest LTER: `knb-lter-and`
+- Arctic LTER: `knb-lter-arc`
+- Baltimore Ecosystem Study LTER: `knb-lter-bes`
+- Beaufort Lagoon Ecosystems LTER: `knb-lter-ble`
+- Bonanza Creek LTER: `knb-lter-bnz`
+- California Current Ecosystem LTER: `knb-lter-cce`
+- Cedar Creek LTER: `knb-lter-cdr`
+- Central Arizona–Phoenix LTER: `knb-lter-cap`
+- City of Seattle (Urban Ecology): `knb-lter-cos`
+- Coweeta LTER: `knb-lter-cwt`
+- Florida Coastal Everglades LTER: `knb-lter-fce`
+- Georgia Coastal Ecosystems LTER: `knb-lter-gce`
+- Harvard Forest LTER: `knb-lter-hfr`
+- Hubbard Brook LTER: `knb-lter-hbr`
+- Jornada Basin LTER: `knb-lter-jrn`
+- Kellogg Biological Station LTER: `knb-lter-kbs`
+- Konza Prairie LTER: `knb-lter-knz`
+- LTER Network Office: `knb-lter-nwk`
+- Luquillo LTER: `knb-lter-luq`
+- McMurdo Dry Valleys LTER: `knb-lter-mcm`
+- Moorea Coral Reef LTER: `knb-lter-mcr`
+- Minneapolis–St. Paul LTER: `knb-lter-msp`
+- Niwot Ridge LTER: `knb-lter-nwt`
+- North Inlet LTER: `knb-lter-nin`
+- North Temperate Lakes LTER: `knb-lter-ntl`
+- Northeast U.S. Shelf LTER: `knb-lter-nes`
+- Northern Gulf of Alaska LTER: `knb-lter-nga`
+- Palmer Antarctica LTER: `knb-lter-pal`
+- Plum Island Ecosystems LTER: `knb-lter-pie`
+- Santa Barbara Coastal LTER: `knb-lter-sbc`
+- Sevilleta LTER: `knb-lter-sev`
+- Shortgrass Steppe LTER: `knb-lter-sgs`
+- Virginia Coast Reserve LTER: `knb-lter-vcr`
+

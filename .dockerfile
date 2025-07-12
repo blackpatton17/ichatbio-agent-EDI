@@ -1,11 +1,11 @@
 # Based on https://github.com/docker/awesome-compose/blob/18f59bdb09ecf520dd5758fbf90dec314baec545/nginx-wsgi-flask/flask/Dockerfile
 
-FROM ubuntu:24.04
+FROM python:3.12-bullseye
 
 RUN apt-get update -y\
  && apt-get install -y\
-      python3-pip\
-      python3.12-venv
+      python3-pip \
+      curl
 
 # Permissions and nonroot user for tightened security
 RUN adduser --disabled-password nonroot
@@ -16,17 +16,14 @@ USER nonroot
 # Copy files to the container
 COPY --chown=nonroot:nonroot . .
 
-# venv
-ENV VIRTUAL_ENV=/home/app/.venv
 
 # Python setup
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+# RUN python3 -m venv .venv
+# RUN .venv/bin/activate && pip install -r requirements.txt
 RUN pip3 install -r requirements.txt
 
 # Define the port number the container should expose
 EXPOSE 8000
 
-WORKDIR /home/app/src
 
-CMD ["python3", "."]
+CMD ["python3", "src"]

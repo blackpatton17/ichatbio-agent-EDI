@@ -73,12 +73,23 @@ async def run(self, context: ResponseContext, request: str):
                 scope, id_, revision = entry["packageid"].split(".")
                 entry["url"] = f"https://pasta.lternet.edu/package/metadata/eml/{scope}/{id_}/{revision}"
             entries.append(entry)
+        await process.log("Top 10 datasets formatted in JSON format.")
+
+        await process.log("About to create artifact with dataset JSON")
+        await process.create_artifact(
+            mimetype="application/json",
+            description=f"Here are the top 10 matching datasets from {url}",
+            # content=json.dumps({"datasets": entries}).encode("utf-8"),
+            metadata={"api_query_url": url}
+        )
+        await process.log("Artifact created successfully")
 
         await context.reply(
             f"Results found at URL: {url}",
             # description=f"Saved the top 10 datasets to {output_path.resolve()}",
             # data={"output_path": str(output_path.resolve())}
         )
+
         # # Save the entries to a local JSON file
         # output_path = Path(os.getenv("EDI_RESULTS_PATH", "edi_search_results.json"))
         # # Write the file in text mode first (if needed), then reopen in binary mode for upload
@@ -87,12 +98,6 @@ async def run(self, context: ResponseContext, request: str):
         # summary_result = await _generate_records_summary(entries)
         # print(summary_result)
         # print("-" * 20)
-
-        await process.create_artifact(
-            mimetype="application/json",
-            description=f"Here are the top 10 matching datasets from {url}",
-            content=json.dumps({"datasets": entries}).encode("utf-8")
-        )
 
 async def _fetch_edi_data(url: str) -> requests.Response:
     """
@@ -225,11 +230,11 @@ async def _generate_records_summary(entries: list) -> list[LLMSummarizationRespo
     return summaries
 
 SYSTEM_PROMPT_TEMPLATE = """
-You translate user requests into parameters for the iDigBio record search API.
+You translate user requests into parameters for the EDIrecord search API.
 
 # Query format
 
-Here is a description of how iDigBio queries are formatted:
+Here is a description of how EDIqueries are formatted:
 
 [BEGIN QUERY FORMAT DOC]
 

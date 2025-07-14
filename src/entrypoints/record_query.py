@@ -78,7 +78,7 @@ async def run(self, context: ResponseContext, request: str):
         await process.log("About to create artifact with dataset JSON")
         await process.create_artifact(
             mimetype="application/json",
-            description=f"Here are the top 10 matching datasets from {url}",
+            description=f"Here are the top 5 matching datasets from {url}",
             content=json.dumps({"datasets": entries}).encode("utf-8"),
             metadata={"api_query_url": url}
         )
@@ -86,7 +86,7 @@ async def run(self, context: ResponseContext, request: str):
 
         await context.reply(
             f"Results found at URL: {url}",
-            # description=f"Saved the top 10 datasets to {output_path.resolve()}",
+            # description=f"Saved the top 5 datasets to {output_path.resolve()}",
             # data={"output_path": str(output_path.resolve())}
         )
 

@@ -79,16 +79,17 @@ async def run(self, context: ResponseContext, request: str):
         await process.create_artifact(
             mimetype="application/json",
             description=f"Here are the top 5 matching datasets from {url}",
-            content=json.dumps({"datasets": entries}).encode("utf-8"),
+            uris=[url],
+            # content=json.dumps({"datasets": "test"}).encode("utf-8"),
             metadata={"api_query_url": url}
         )
         await process.log("Artifact created successfully")
 
-        await context.reply(
-            f"Results found at URL: {url}",
-            # description=f"Saved the top 5 datasets to {output_path.resolve()}",
-            # data={"output_path": str(output_path.resolve())}
-        )
+    await context.reply(
+        f"Results found at URL: {url}",
+        # description=f"Saved the top 5 datasets to {output_path.resolve()}",
+        # data={"output_path": str(output_path.resolve())}
+    )
 
         # # Save the entries to a local JSON file
         # output_path = Path(os.getenv("EDI_RESULTS_PATH", "edi_search_results.json"))

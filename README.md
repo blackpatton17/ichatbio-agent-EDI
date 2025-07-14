@@ -26,13 +26,13 @@ export OPENAI_API_KEY=<your key>
 
 test agent
 ```py
-PYTHONPATH=src pytest -s tests/test_agent.py
+pytest -s tests/test_agent.py
 ```
 
 
 test llm 
 ```py
-PYTHONPATH=src pytest -s tests/test_prompt_parsing.py
+pytest -s tests/test_prompt_parsing.py
 ```
 
  Command to run docker container in `run.sh`

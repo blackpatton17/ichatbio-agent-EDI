@@ -38,4 +38,6 @@ class EDIAgent(IChatBioAgent):
         match params:
             case None:
                 await record_query.run(self, context, request)
+            case _:
+                await record_query.run(self, context, request)
 

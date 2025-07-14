@@ -54,7 +54,7 @@ async def run(self, context: ResponseContext, request: str):
         await process.log("Datasets found, processing results...")
         root = ET.fromstring(results)
         entries = []
-        for doc in root.findall("document")[:10]:
+        for doc in root.findall("document")[:5]:
             entry = {}
             for child in doc:
                 # If the child has sub-elements, handle as list or dict
@@ -73,13 +73,13 @@ async def run(self, context: ResponseContext, request: str):
                 scope, id_, revision = entry["packageid"].split(".")
                 entry["url"] = f"https://pasta.lternet.edu/package/metadata/eml/{scope}/{id_}/{revision}"
             entries.append(entry)
-        await process.log("Top 10 datasets formatted in JSON format.")
+        await process.log("Top 5 datasets formatted in JSON format.")
 
         await process.log("About to create artifact with dataset JSON")
         await process.create_artifact(
             mimetype="application/json",
             description=f"Here are the top 10 matching datasets from {url}",
-            # content=json.dumps({"datasets": entries}).encode("utf-8"),
+            content=json.dumps({"datasets": entries}).encode("utf-8"),
             metadata={"api_query_url": url}
         )
         await process.log("Artifact created successfully")

@@ -21,7 +21,7 @@ Note: unless the user delcare to search something in a specific field, e.g.  `ke
     }
   },
   "fl": ["packageid", "keyword"],
-  "rows": 1000
+  "rows": 50
 }
 ```
 
@@ -40,7 +40,7 @@ Note: unless the user delcare to search something in a specific field, e.g.  `ke
     }
   },
   "fl": ["packageid", "keyword"],
-  "rows": 1000
+  "rows": 50
 }
 ```
 
@@ -54,7 +54,7 @@ Note: unless the user delcare to search something in a specific field, e.g.  `ke
     }
   },
   "fl": ["packageid", "keyword"],
-  "rows": 1000
+  "rows": 50
 }
 ```
 
@@ -76,7 +76,7 @@ Note: unless the user delcare to search something in a specific field, e.g.  `ke
     }
   },
   "fl": ["packageid", "author", "pubdate"],
-  "rows": 1000
+  "rows": 50
 }
 ```
 

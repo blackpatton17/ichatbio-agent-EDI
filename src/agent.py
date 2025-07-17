@@ -10,7 +10,7 @@ from ichatbio.agent import IChatBioAgent
 from ichatbio.types import AgentCard, AgentEntrypoint
 from ichatbio.agent_response import ResponseContext
 
-from entrypoints import record_query
+from entrypoints import search_record, analyze_record
 
 from util.ai import AIGenerationException, StopOnTerminalErrorOrMaxAttempts
 
@@ -25,7 +25,8 @@ class EDIAgent(IChatBioAgent):
             description="Searches datasets from PASTA+ EDI repository.",
             icon=None,
             entrypoints=[
-                record_query.entrypoint
+                search_record.entrypoint,
+                analyze_record.entrypoint
             ]
         )
 
@@ -35,9 +36,13 @@ class EDIAgent(IChatBioAgent):
 
     @override
     async def run(self, context: ResponseContext, request: str, entrypoint: str, params: Optional[BaseModel]):
-        match params:
+        match entrypoint:
+            case search_record.entrypoint.id:
+                await search_record.run(self, context, request)
+            case analyze_record.entrypoint.id:
+                await analyze_record.run(self, context, request, params)
             case None:
-                await record_query.run(self, context, request)
+                await context.error("No entrypoint specified.")
             case _:
-                await record_query.run(self, context, request)
+                await search_record.run(self, context, request)
 

@@ -1,0 +1,930 @@
+{
+  "packageId": "edi.456.5",
+  "system": "https://pasta.edirepository.org",
+  "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation": "https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd",
+  "access": {
+    "authSystem": "https://pasta.edirepository.org/authentication",
+    "order": "allowFirst",
+    "scope": "document",
+    "system": "https://pasta.edirepository.org",
+    "allow": [
+      {
+        "principal": {
+          "text": "uid=EDI,o=EDI,dc=edirepository,dc=org"
+        },
+        "permission": {
+          "text": "all"
+        }
+      },
+      {
+        "principal": {
+          "text": "uid=ccarey,o=EDI,dc=edirepository,dc=org"
+        },
+        "permission": {
+          "text": "all"
+        }
+      },
+      {
+        "principal": {
+          "text": "public"
+        },
+        "permission": {
+          "text": "read"
+        }
+      }
+    ]
+  },
+  "dataset": {
+    "alternateIdentifier": {
+      "system": "https://doi.org",
+      "text": "doi:10.6073/pasta/7d6bb61d52555a4b91024ad132b479f9"
+    },
+    "title": {
+      "text": "Ice cover data for Falling Creek Reservoir and Beaverdam Reservoir, Vinton, Virginia, USA for December 2013-December 2022"
+    },
+    "creator": [
+      {
+        "individualName": {
+          "givenName": [
+            {
+              "text": "Cayelan"
+            },
+            {
+              "text": "C."
+            }
+          ],
+          "surName": {
+            "text": "Carey"
+          }
+        },
+        "organizationName": {
+          "text": "Virginia Tech"
+        },
+        "electronicMailAddress": {
+          "text": "cayelan@vt.edu"
+        },
+        "userId": {
+          "directory": "https://orcid.org",
+          "text": "https://orcid.org/0000-0001-8835-4476"
+        }
+      },
+      {
+        "individualName": {
+          "givenName": {
+            "text": "Adrienne"
+          },
+          "surName": {
+            "text": "Breef-Pilz"
+          }
+        },
+        "organizationName": {
+          "text": "Virginia Tech"
+        },
+        "electronicMailAddress": {
+          "text": "abreefpilz@vt.edu"
+        },
+        "userId": {
+          "directory": "https://orcid.org",
+          "text": "https://orcid.org/0000-0002-6759-0063"
+        }
+      }
+    ],
+    "pubDate": {
+      "text": "2024-01-11"
+    },
+    "abstract": {
+      "para": {
+        "text": "Ice cover was recorded at Falling Creek Reservoir and Beaverdam Reservoir (both located in Vinton, Virginia, USA) using multiple methods. The ice cover record for Falling Creek Reservoir began in the winter of 2013-2014 and Beaverdam Reservoir beginning in the winter of 2020-2021. Falling Creek Reservoir and Beaverdam Reservoir are owned and operated by the Western Virginia Water Authority as a primary and secondary drinking water source, respectively, for Roanoke, Virginia. These two reservoirs are some of the southernmost waterbodies in the United States that exhibit ice cover during the winter. Given incipient climate change, Falling Creek Reservoir and Beaverdam Reservoir's ice cover data represent an important record of warming for waterbodies in the southeastern United States. Ice cover presence was assessed using multiple methods: visual observation of ice spanning the deep hole (from an observer standing on a reservoir's dam); visual observation via an automated camera deployed near the deep hole; water temperature data from a profile of sensors deployed at a reservoir's deepest site; upwelling shortwave radiation and albedo measured by a meteorological station deployed on a metal structure located over Falling Creek Reservoir's deep hole; and dissolved oxygen sensors deployed at multiple depths at the deep hole of both reservoirs."
+      }
+    },
+    "keywordSet": [
+      {
+        "keyword": [
+          {
+            "text": "Carey Lab"
+          },
+          {
+            "text": "Virginia Tech"
+          },
+          {
+            "text": "Western Virginia Water Authority"
+          },
+          {
+            "text": "Falling Creek Reservoir"
+          },
+          {
+            "text": "Beaverdam Reservoir"
+          },
+          {
+            "text": "Stream Team"
+          },
+          {
+            "text": "Virginia Reservoirs LTREB"
+          },
+          {
+            "text": "LTREB"
+          },
+          {
+            "text": "Virginia Reservoirs"
+          }
+        ],
+        "keywordThesaurus": {
+          "text": "carey lab controlled vocabulary"
+        }
+      },
+      {
+        "keyword": {
+          "text": "Reservoir"
+        },
+        "keywordThesaurus": {
+          "text": "cuahsi controlled vocabulary"
+        }
+      },
+      {
+        "keyword": [
+          {
+            "text": "ice"
+          },
+          {
+            "text": "ice cover"
+          },
+          {
+            "text": "ice-off"
+          },
+          {
+            "text": "ice-on"
+          }
+        ],
+        "keywordThesaurus": {
+          "text": "lter controlled vocabulary"
+        }
+      }
+    ],
+    "additionalInfo": {
+      "para": {
+        "text": "Authorship contribution statement: CCC developed and coordinated the ice monitoring dataset, led data analyses, and is responsible for maintaining the dataset over time. ABP led the FCR meteorology dataset and FCR and BVR sensor dataset needed for the ice cover classification, and led winter fieldwork. Acknowledgements: This data package has been iteratively updated over time and builds on the previous revisions. We thank the Western Virginia Water Authority for providing access to these sites and the Reservoir Group for contributing to fieldwork."
+      }
+    },
+    "intellectualRights": {
+      "para": {
+        "text": "This information is released under the Creative Commons license - Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/). The consumer of these data (\\\"Data User\\\" herein) is required to cite it appropriately in any publication that results from its use. The Data User should realize that these data may be actively used by others for ongoing research and that coordination may be necessary to prevent duplicate publication. The Data User is urged to contact the authors of these data if any questions about methodology or results occur. Where appropriate, the Data User is encouraged to consider collaboration or co-authorship with the authors. The Data User should realize that misinterpretation of data may occur if used out of context of the original study. While substantial efforts are made to ensure the accuracy of data and associated documentation, complete accuracy of data sets cannot be guaranteed. All data are made available \\\"as is.\\\" The Data User should be aware, however, that data are updated periodically and it is the responsibility of the Data User to check for new versions of the data. The data authors and the repository where these data were obtained shall not be liable for damages resulting from any use or misinterpretation of the data. Thank you."
+      }
+    },
+    "distribution": {
+      "id": "10.6073/pasta/7d6bb61d52555a4b91024ad132b479f9",
+      "scope": "system",
+      "system": "https://pasta.edirepository.org",
+      "online": {
+        "url": {
+          "function": "information",
+          "text": "https://doi.org/10.6073/pasta/7d6bb61d52555a4b91024ad132b479f9"
+        }
+      }
+    },
+    "coverage": {
+      "geographicCoverage": [
+        {
+          "geographicDescription": {
+            "text": "Falling Creek Reservoir is located in Vinton, Virginia, USA"
+          },
+          "boundingCoordinates": {
+            "westBoundingCoordinate": {
+              "text": "-79.839249"
+            },
+            "eastBoundingCoordinate": {
+              "text": "-79.836009"
+            },
+            "northBoundingCoordinate": {
+              "text": "37.309589"
+            },
+            "southBoundingCoordinate": {
+              "text": "37.30266"
+            }
+          }
+        },
+        {
+          "geographicDescription": {
+            "text": "Beaverdam Reservoir is located in Vinton, Virginia, USA"
+          },
+          "boundingCoordinates": {
+            "westBoundingCoordinate": {
+              "text": "-79.824834"
+            },
+            "eastBoundingCoordinate": {
+              "text": "-79.813848"
+            },
+            "northBoundingCoordinate": {
+              "text": "37.322865"
+            },
+            "southBoundingCoordinate": {
+              "text": "37.311961"
+            }
+          }
+        }
+      ],
+      "temporalCoverage": {
+        "rangeOfDates": {
+          "beginDate": {
+            "calendarDate": {
+              "text": "2014-01-06"
+            }
+          },
+          "endDate": {
+            "calendarDate": {
+              "text": "2022-12-31"
+            }
+          }
+        }
+      }
+    },
+    "maintenance": {
+      "description": {
+        "text": "ongoing"
+      }
+    },
+    "contact": {
+      "individualName": {
+        "givenName": [
+          {
+            "text": "Cayelan"
+          },
+          {
+            "text": "C."
+          }
+        ],
+        "surName": {
+          "text": "Carey"
+        }
+      },
+      "organizationName": {
+        "text": "Virginia Tech"
+      },
+      "electronicMailAddress": {
+        "text": "cayelan@vt.edu"
+      },
+      "userId": {
+        "directory": "https://orcid.org",
+        "text": "https://orcid.org/0000-0001-8835-4476"
+      }
+    },
+    "publisher": {
+      "organizationName": {
+        "text": "Environmental Data Initiative"
+      },
+      "electronicMailAddress": {
+        "text": "info@edirepository.org"
+      },
+      "onlineUrl": {
+        "text": "https://edirepository.org"
+      },
+      "userId": {
+        "directory": "https://ror.org",
+        "text": "0330j0z60"
+      }
+    },
+    "pubPlace": {
+      "text": "Environmental Data Initiative"
+    },
+    "methods": {
+      "methodStep": {
+        "description": {
+          "para": [
+            {
+              "text": "We measured ice cover at Falling Creek Reservoir (FCR) beginning in the winter of 2013-2014 and Beaverdam Reservoir (BVR) beginning in the winter of 2020-2021. We defined ice cover as the presence of ice (any thickness) covering more than 50% of the East-West diameter of the deep hole of FCR or BVR, as could be ascertained by a visual observer standing at the catwalk at the center point of the dam of the reservoir looking in the North direction (FCR) or at the boat launch looking in the North direction (BVR). This ice cover metric should only be applied for the deep hole of the two reservoirs because it may not be always representative of ice cover on the shallow upstream arm of the reservoirs. However, we can confirm from hiking around FCR on four sampling days with complete ice cover at the deep hole during the monitoring period that the ice coverage at the deep hole was the same as upstream and throughout the reservoir as a whole."
+            },
+            {
+              "text": "Carey received daily ice observations for FCR from Western Virginia Water Authority (WVWA) reservoir water treatment operators on site during most of 2013-2016. After winter 2016, reservoir water treatment operators were not consistently at FCR and thus visual observations from WVWA staff became sporadic. During winter 2017-2021, there were occasional visual observations from members of the Carey Lab at Virginia Tech on FCR or BVR sampling days or WVWA staff. In winters 2021-2022, we added in a new method of visual observation at FCR by taking automated photos of the reservoir with an ice camera (GardePro A3S Trail Game Camera 24MP, Guangdong, China). Two cameras were deployed on the end of FCR’s catwalk, with one facing in the Northwest direction and the other facing in the Southwest direction; both took one photo every hour. We used these data to validate the ice cover dates."
+            },
+            {
+              "text": "If visual observation data were not available, we used three alternate methods to determine ice cover. First, we used water temperature data from thermistors deployed at multiple depths in FCR from 2018-2022 (Carey et al. 2023b) or thermistors in BVR from 2020-2022 as well as HOBO temperature loggers deployed at 1-m depth resolution at the same BVR deep hole site in 2016-2018 (Carey et al. 2023a) to check for near-zero temperatures at the surface of the water column and inverse thermal stratification, which signified the presence of ice. Following Wetzel (2001), inverse stratification is easily disrupted by a small amount of wind, so if inverse stratification occurred amidst measurable wind at the reservoir (see Carey and Breef-Pilz 2023 for wind data), then we classified that period as having ice cover."
+            },
+            {
+              "text": "Second, the water temperature data were verified by looking at data from a research-grade meteorological station deployed on FCR's dam. The meteorological station had an upwelling shortwave radiation sensor deployed on the catwalk over the reservoir (see Carey and Breef-Pilz 2023). During periods of ice cover, the upwelling radiation exhibited higher radiation values because of the reflection of light off the ice during daylight hours, which was used to identify days of ice cover at FCR's deep hole. We also referred to the albedo data (upwelling shortwave radiation/downwelling shortwave radiation) as a check on cloudy days (Carey and Breef-Pilz 2023)."
+            },
+            {
+              "text": "Third, the water temperature data were also verified by looking at dissolved oxygen concentrations measured by sensors deployed at the deep hole at 1.6 m, 5 m, and 9 m depths in FCR and 7.5 m, 1.5 m, and 0.5 m above the sediments at BVR (Carey et al. 2023a,b). During periods with more than 1 day of ice cover, dissolved oxygen depletion at depth was noticeable, which indicated inverse stratification."
+            },
+            {
+              "text": "Years without any data indicate that no ice was detected during those winters after the onset of data collection."
+            },
+            {
+              "text": "While these methods are not perfect, they represented the most robust way possible to maintain a daily ice cover record over time given the data available. Data flags are conservative and indicate ice periods without visual observations or additional dissolved oxygen data for double verification."
+            },
+            {
+              "text": "References: Carey, C.C. and A. Breef-Pilz. 2023. Time series of high-frequency meteorological data at Falling Creek Reservoir, Virginia, USA 2015-2022 ver 7. Environmental Data Initiative. https://doi.org/10.6073/pasta/f3f97c7fdd287c29084bf52fc759a801 (Accessed 2023-07-20)."
+            },
+            {
+              "text": "Carey, C.C., A. Breef-Pilz, B.J. Bookout, R.P. McClure, and J.H. Wynne. 2023a. Time series of high-frequency sensor data measuring water temperature, dissolved oxygen, conductivity, specific conductance, total dissolved solids, chlorophyll a, phycocyanin, fluorescent dissolved organic matter, and turbidity at discrete depths in Beaverdam Reservoir, Virginia, USA in 2016-2022 ver 3. Environmental Data Initiative. https://doi.org/10.6073/pasta/4182de376fde52e15d493fdd9f26d0c7 (Accessed 2023-07-20)."
+            },
+            {
+              "text": "Carey, C.C., A. Breef-Pilz, and W.M. Woelmer. 2023b. Time series of high-frequency sensor data measuring water temperature, dissolved oxygen, pressure, conductivity, specific conductance, total dissolved solids, chlorophyll a, phycocyanin, fluorescent dissolved organic matter, and turbidity at discrete depths in Falling Creek Reservoir, Virginia, USA in 2018-2022 ver 7. Environmental Data Initiative. https://doi.org/10.6073/pasta/f6bb4f5f602060dec6652ff8eb555082 (Accessed 2023-07-20)."
+            },
+            {
+              "text": "Wetzel, R.G. 2001. Limnology, 3rd edition. Academic Press, New York."
+            }
+          ]
+        }
+      }
+    },
+    "project": {
+      "title": {
+        "text": "Collaborative Research: Consequences of changing oxygen availability for carbon cycling in freshwater ecosystems"
+      },
+      "personnel": {
+        "individualName": {
+          "givenName": [
+            {
+              "text": "Cayelan"
+            },
+            {
+              "text": "C."
+            }
+          ],
+          "surName": {
+            "text": "Carey"
+          }
+        },
+        "organizationName": {
+          "text": "Virginia Tech"
+        },
+        "electronicMailAddress": {
+          "text": "cayelan@vt.edu"
+        },
+        "userId": {
+          "directory": "https://orcid.org",
+          "text": "https://orcid.org/0000-0001-8835-4476"
+        },
+        "role": {
+          "text": "Principal Investigator"
+        }
+      },
+      "funding": {
+        "text": "National Science Foundation 1753639"
+      },
+      "relatedProject": [
+        {
+          "title": {
+            "text": "No project title to report"
+          },
+          "personnel": {
+            "individualName": {
+              "givenName": [
+                {
+                  "text": "Cayelan"
+                },
+                {
+                  "text": "C."
+                }
+              ],
+              "surName": {
+                "text": "Carey"
+              }
+            },
+            "organizationName": {
+              "text": "Virginia Tech"
+            },
+            "electronicMailAddress": {
+              "text": "cayelan@vt.edu"
+            },
+            "userId": {
+              "directory": "https://orcid.org",
+              "text": "https://orcid.org/0000-0001-8835-4476"
+            },
+            "role": {
+              "text": "Principal Investigator"
+            }
+          },
+          "funding": {
+            "text": "Western Virginia Water Authority"
+          }
+        },
+        {
+          "title": {
+            "text": "Collaborative Research: CIBR: Cyberinfrastructure Enabling End-to-End Workflows for Aquatic Ecosystem Forecasting"
+          },
+          "personnel": {
+            "individualName": {
+              "givenName": [
+                {
+                  "text": "Cayelan"
+                },
+                {
+                  "text": "C."
+                }
+              ],
+              "surName": {
+                "text": "Carey"
+              }
+            },
+            "organizationName": {
+              "text": "Virginia Tech"
+            },
+            "electronicMailAddress": {
+              "text": "cayelan@vt.edu"
+            },
+            "userId": {
+              "directory": "https://orcid.org",
+              "text": "https://orcid.org/0000-0001-8835-4476"
+            },
+            "role": {
+              "text": "Principal Investigator"
+            }
+          },
+          "funding": {
+            "text": "National Science Foundation 1933016"
+          }
+        },
+        {
+          "title": {
+            "text": "Collaborative Research: CIBR: Cyberinfrastructure Enabling End-to-End Workflows for Aquatic Ecosystem Forecasting"
+          },
+          "personnel": {
+            "individualName": {
+              "givenName": [
+                {
+                  "text": "Renato"
+                },
+                {
+                  "text": "J."
+                }
+              ],
+              "surName": {
+                "text": "Figueiredo"
+              }
+            },
+            "organizationName": {
+              "text": "University of Florida"
+            },
+            "electronicMailAddress": {
+              "text": "renato@ece.ufl.edu"
+            },
+            "userId": {
+              "directory": "https://orcid.org",
+              "text": "https://orcid.org/0000-0001-8835-4476"
+            },
+            "role": {
+              "text": "Principal Investigator"
+            }
+          },
+          "funding": {
+            "text": "National Science Foundation DBI-1933102"
+          }
+        },
+        {
+          "title": {
+            "text": "LTREB: Integrating real-time open data pipelines and forecasting to quantify ecosystem predictability at day to decadal scales"
+          },
+          "personnel": {
+            "individualName": {
+              "givenName": [
+                {
+                  "text": "Cayelan"
+                },
+                {
+                  "text": "C."
+                }
+              ],
+              "surName": {
+                "text": "Carey"
+              }
+            },
+            "organizationName": {
+              "text": "Virginia Tech"
+            },
+            "electronicMailAddress": {
+              "text": "cayelan@vt.edu"
+            },
+            "userId": {
+              "directory": "https://orcid.org",
+              "text": "https://orcid.org/0000-0001-8835-4476"
+            },
+            "role": {
+              "text": "Principal Investigator"
+            }
+          },
+          "funding": {
+            "text": "National Science Foundation 2327030"
+          }
+        },
+        {
+          "title": {
+            "text": "Collaborative Research: URoL:ASC: Applying rules of life to forecast emergent behavior of phytoplankton and advance water quality management"
+          },
+          "personnel": {
+            "individualName": {
+              "givenName": [
+                {
+                  "text": "Cayelan"
+                },
+                {
+                  "text": "C."
+                }
+              ],
+              "surName": {
+                "text": "Carey"
+              }
+            },
+            "organizationName": {
+              "text": "Virginia Tech"
+            },
+            "electronicMailAddress": {
+              "text": "cayelan@vt.edu"
+            },
+            "userId": {
+              "directory": "https://orcid.org",
+              "text": "https://orcid.org/0000-0001-8835-4476"
+            },
+            "role": {
+              "text": "Principal Investigator"
+            }
+          },
+          "funding": {
+            "text": "National Science Foundation 2318861"
+          }
+        }
+      ]
+    },
+    "dataTable": {
+      "id": "ebfaad16975326a7b874a21beb50c151",
+      "scope": "document",
+      "system": "https://pasta.edirepository.org",
+      "entityName": {
+        "text": "Ice_Data_2013_2022updated.csv"
+      },
+      "entityDescription": {
+        "text": "Ice-on and ice-off data recorded for Falling Creek Reservoir and Beaverdam Reservoir during 2013-2022"
+      },
+      "physical": {
+        "objectName": {
+          "text": "Ice_Data_2013_2022updated.csv"
+        },
+        "size": {
+          "unit": "bytes",
+          "text": "2759"
+        },
+        "authentication": {
+          "method": "MD5",
+          "text": "fcc14311706e8b908a766b7ef79af5cd"
+        },
+        "dataFormat": {
+          "textFormat": {
+            "numHeaderLines": {
+              "text": "1"
+            },
+            "recordDelimiter": {
+              "text": "\\n"
+            },
+            "attributeOrientation": {
+              "text": "column"
+            },
+            "simpleDelimited": {
+              "fieldDelimiter": {
+                "text": ","
+              }
+            }
+          }
+        },
+        "distribution": {
+          "online": {
+            "url": {
+              "function": "download",
+              "text": "https://pasta.lternet.edu/package/data/eml/edi/456/5/ebfaad16975326a7b874a21beb50c151"
+            }
+          }
+        }
+      },
+      "attributeList": {
+        "attribute": [
+          {
+            "attributeName": {
+              "text": "Reservoir"
+            },
+            "attributeDefinition": {
+              "text": "Three-letter code corresponding to sampled reservoir; FCR=Falling Creek Reservoir, BVR=Beaverdam Reservoir"
+            },
+            "storageType": {
+              "text": "string"
+            },
+            "measurementScale": {
+              "nominal": {
+                "nonNumericDomain": {
+                  "textDomain": {
+                    "definition": {
+                      "text": "Three-letter code corresponding to sampled reservoir; FCR=Falling Creek Reservoir, BVR=Beaverdam Reservoir"
+                    }
+                  }
+                }
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "Site"
+            },
+            "attributeDefinition": {
+              "text": "Sampling site within each reservoir; 50=deepest site near dam"
+            },
+            "storageType": {
+              "text": "float"
+            },
+            "measurementScale": {
+              "ratio": {
+                "unit": {
+                  "standardUnit": {
+                    "text": "dimensionless"
+                  }
+                },
+                "numericDomain": {
+                  "numberType": {
+                    "text": "natural"
+                  },
+                  "bounds": {
+                    "minimum": {
+                      "exclusive": "false",
+                      "text": "50"
+                    },
+                    "maximum": {
+                      "exclusive": "false",
+                      "text": "50"
+                    }
+                  }
+                }
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "Date"
+            },
+            "attributeDefinition": {
+              "text": "Date of ice-on or ice-off"
+            },
+            "storageType": {
+              "text": "date"
+            },
+            "measurementScale": {
+              "dateTime": {
+                "formatString": {
+                  "text": "YYYY-MM-DD"
+                },
+                "dateTimeDomain": {}
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "Year"
+            },
+            "attributeDefinition": {
+              "text": "Year of observation"
+            },
+            "storageType": {
+              "text": "date"
+            },
+            "measurementScale": {
+              "dateTime": {
+                "formatString": {
+                  "text": "YYYY"
+                },
+                "dateTimeDomain": {}
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "DayOfYear"
+            },
+            "attributeDefinition": {
+              "text": "Date of observation"
+            },
+            "storageType": {
+              "text": "date"
+            },
+            "measurementScale": {
+              "dateTime": {
+                "formatString": {
+                  "text": "DD"
+                },
+                "dateTimeDomain": {}
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "IceOn"
+            },
+            "attributeDefinition": {
+              "text": "This value indicates if ice-on occurred"
+            },
+            "storageType": {
+              "text": "float"
+            },
+            "measurementScale": {
+              "ratio": {
+                "unit": {
+                  "standardUnit": {
+                    "text": "dimensionless"
+                  }
+                },
+                "numericDomain": {
+                  "numberType": {
+                    "text": "whole"
+                  },
+                  "bounds": {
+                    "minimum": {
+                      "exclusive": "false",
+                      "text": "0"
+                    },
+                    "maximum": {
+                      "exclusive": "false",
+                      "text": "1"
+                    }
+                  }
+                }
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "IceOff"
+            },
+            "attributeDefinition": {
+              "text": "This value indicates if ice-off occurred"
+            },
+            "storageType": {
+              "text": "float"
+            },
+            "measurementScale": {
+              "ratio": {
+                "unit": {
+                  "standardUnit": {
+                    "text": "dimensionless"
+                  }
+                },
+                "numericDomain": {
+                  "numberType": {
+                    "text": "whole"
+                  },
+                  "bounds": {
+                    "minimum": {
+                      "exclusive": "false",
+                      "text": "0"
+                    },
+                    "maximum": {
+                      "exclusive": "false",
+                      "text": "1"
+                    }
+                  }
+                }
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "Method"
+            },
+            "attributeDefinition": {
+              "text": "Code for method used to determine ice-on or ice-off; V=Visual observation of ice presence or absence; T=Temperature Inverse Stratification method (see methods for details)"
+            },
+            "storageType": {
+              "text": "string"
+            },
+            "measurementScale": {
+              "nominal": {
+                "nonNumericDomain": {
+                  "textDomain": {
+                    "definition": {
+                      "text": "Code for method used to determine ice-on or ice-off; V=Visual observation of ice presence or absence; T=Temperature Inverse Stratification method (see methods for details)"
+                    }
+                  }
+                }
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          },
+          {
+            "attributeName": {
+              "text": "Flag_IceValue"
+            },
+            "attributeDefinition": {
+              "text": "Flag for ice-on or ice-off; 0=no flag; 1=indicate ice periods without visual observations or additional dissolved oxygen data for double verification of ice"
+            },
+            "storageType": {
+              "text": "float"
+            },
+            "measurementScale": {
+              "ratio": {
+                "unit": {
+                  "standardUnit": {
+                    "text": "dimensionless"
+                  }
+                },
+                "numericDomain": {
+                  "numberType": {
+                    "text": "whole"
+                  },
+                  "bounds": {
+                    "minimum": {
+                      "exclusive": "false",
+                      "text": "0"
+                    },
+                    "maximum": {
+                      "exclusive": "false",
+                      "text": "1"
+                    }
+                  }
+                }
+              }
+            },
+            "missingValueCode": {
+              "code": {
+                "text": "NA"
+              },
+              "codeExplanation": {
+                "text": "value is missing"
+              }
+            }
+          }
+        ]
+      },
+      "numberOfRecords": {
+        "text": "79"
+      }
+    }
+  },
+  "additionalMetadata": {
+    "metadata": {
+      "emlEditor": {
+        "app": {
+          "text": "EMLassemblyline"
+        },
+        "release": {
+          "text": "3.5.5"
+        }
+      }
+    }
+  }
+}

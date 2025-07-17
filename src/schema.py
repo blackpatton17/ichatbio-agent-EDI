@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from pydantic import RootModel
 from typing import Dict, Literal
 
+# ------------ Coordinate and Date Range Models ---------------
 class Coordinate(BaseModel):
     lat: float = Field(..., ge=-90, le=90)
     lon: float = Field(..., ge=-180, le=180)
@@ -20,7 +21,7 @@ class BoundingBoxValue(BaseModel):
     right_bottom: Coordinate
 
 
-
+# --------------- Filter Field and Query Models ---------------
 class FilterField(BaseModel):
     type: Literal["exact", "fulltext", "range", "prefix"]
     value: Union[str, dict]
@@ -96,3 +97,19 @@ class LLMQueryParamResponseModel(BaseModel):
 
 class LLMSummarizationResponseModel(BaseModel):
     summary: str = Field(description="A summary of the retrieved occurrence record data")
+
+
+# --------------- Analysis Request Model ---------------
+class AnalysisRequestModel(BaseModel):
+    id: str = Field(
+        description="The unique identifier of the record to fetch from the EDI repository.",
+        example="edi.456.5"
+    )
+    url: str = Field(
+        description="The URL of the record to fetch from the EDI repository.",
+        example="https://pasta.lternet.edu/package/metadata/eml/edi/456/5"
+    )
+        fields: list[str] = Field(
+        default_factory=list,
+        description="List of metadata fields or sections to analyze (e.g., ['title', 'abstract', 'creator', 'methods'])."
+    )

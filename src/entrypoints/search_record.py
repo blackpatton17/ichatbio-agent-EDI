@@ -79,8 +79,8 @@ async def run(self, context: ResponseContext, request: str):
         await process.create_artifact(
             mimetype="application/json",
             description=f"Here are the top 5 matching datasets from {url}",
-            uris=[url],
-            # content=json.dumps({"datasets": "test"}).encode("utf-8"),
+            # uris=[url],
+            content=json.dumps({"datasets": "test"}).encode("utf-8"),
             metadata={"api_query_url": url}
         )
         await process.log("Artifact created successfully")

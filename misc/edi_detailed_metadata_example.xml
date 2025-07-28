@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml packageId="edi.456.5" system="https://pasta.edirepository.org"
+  xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0"
+  xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+   <access
+    authSystem="https://pasta.edirepository.org/authentication"
+    order="allowFirst" scope="document"
+      system="https://pasta.edirepository.org">
+      <allow>
+         <principal>uid=EDI,o=EDI,dc=edirepository,dc=org</principal>
+         <permission>all</permission>
+      </allow>
+      <allow>
+         <principal>uid=ccarey,o=EDI,dc=edirepository,dc=org</principal>
+         <permission>all</permission>
+      </allow>
+      <allow>
+         <principal>public</principal>
+         <permission>read</permission>
+      </allow>
+   </access>
+   <dataset>
+      <alternateIdentifier
+        system="https://doi.org">doi:10.6073/pasta/7d6bb61d52555a4b91024ad132b479f9</alternateIdentifier><title>Ice cover data for Falling Creek Reservoir and Beaverdam Reservoir, Vinton, Virginia, USA for December 2013-December 2022</title>
+      <creator>
+         <individualName>
+            <givenName>Cayelan</givenName>
+            <givenName>C.</givenName>
+            <surName>Carey</surName>
+         </individualName>
+         <organizationName>Virginia Tech</organizationName>
+         <electronicMailAddress>cayelan@vt.edu</electronicMailAddress>
+         <userId
+        directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+      </creator>
+      <creator>
+         <individualName>
+            <givenName>Adrienne</givenName>
+            <surName>Breef-Pilz</surName>
+         </individualName>
+         <organizationName>Virginia Tech</organizationName>
+         <electronicMailAddress>abreefpilz@vt.edu</electronicMailAddress>
+         <userId
+      directory="https://orcid.org">https://orcid.org/0000-0002-6759-0063</userId>
+      </creator>
+      <pubDate>2024-01-11</pubDate>
+      <abstract>
+         <para>Ice cover was recorded at Falling Creek Reservoir and Beaverdam Reservoir (both located in Vinton, Virginia, USA) using multiple methods. The ice cover record for Falling Creek Reservoir began in the winter of 2013-2014 and Beaverdam Reservoir beginning in the winter of 2020-2021. Falling Creek Reservoir and Beaverdam Reservoir are owned and operated by the Western Virginia Water Authority as a primary and secondary drinking water source, respectively, for Roanoke, Virginia. These two reservoirs are some of the southernmost waterbodies in the United States that exhibit ice cover during the winter. Given incipient climate change, Falling Creek Reservoir and Beaverdam Reservoir's ice cover data represent an important record of warming for waterbodies in the southeastern United States. Ice cover presence was assessed using multiple methods: visual observation of ice spanning the deep hole (from an observer standing on a reservoir's dam); visual observation via an automated camera deployed near the deep hole; water temperature data from a profile of sensors deployed at a reservoir's deepest site; upwelling shortwave radiation and albedo measured by a meteorological station deployed on a metal structure located over Falling Creek Reservoir's deep hole; and dissolved oxygen sensors deployed at multiple depths at the deep hole of both reservoirs.</para>
+      </abstract>
+      <keywordSet>
+         <keyword>Carey Lab</keyword>
+         <keyword>Virginia Tech</keyword>
+         <keyword>Western Virginia Water Authority</keyword>
+         <keyword>Falling Creek Reservoir</keyword>
+         <keyword>Beaverdam Reservoir</keyword>
+         <keyword>Stream Team</keyword>
+         <keyword>Virginia Reservoirs LTREB</keyword>
+         <keyword>LTREB</keyword>
+         <keyword>Virginia Reservoirs</keyword>
+         <keywordThesaurus>carey lab controlled vocabulary</keywordThesaurus>
+      </keywordSet>
+      <keywordSet>
+         <keyword>Reservoir</keyword>
+         <keywordThesaurus>cuahsi controlled vocabulary</keywordThesaurus>
+      </keywordSet>
+      <keywordSet>
+         <keyword>ice</keyword>
+         <keyword>ice cover</keyword>
+         <keyword>ice-off</keyword>
+         <keyword>ice-on</keyword>
+         <keywordThesaurus>lter controlled vocabulary</keywordThesaurus>
+      </keywordSet>
+      <additionalInfo>
+         <para>Authorship contribution statement: CCC developed and coordinated the ice monitoring dataset, led data analyses, and is responsible for maintaining the dataset over time. ABP led the FCR meteorology dataset and FCR and BVR sensor dataset needed for the ice cover classification, and led winter fieldwork. Acknowledgements: This data package has been iteratively updated over time and builds on the previous revisions. We thank the Western Virginia Water Authority for providing access to these sites and the Reservoir Group for contributing to fieldwork.</para>
+      </additionalInfo>
+      <intellectualRights>
+         <para>This information is released under the Creative Commons license - Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/). The consumer of these data (\"Data User\" herein) is required to cite it appropriately in any publication that results from its use. The Data User should realize that these data may be actively used by others for ongoing research and that coordination may be necessary to prevent duplicate publication. The Data User is urged to contact the authors of these data if any questions about methodology or results occur. Where appropriate, the Data User is encouraged to consider collaboration or co-authorship with the authors. The Data User should realize that misinterpretation of data may occur if used out of context of the original study. While substantial efforts are made to ensure the accuracy of data and associated documentation, complete accuracy of data sets cannot be guaranteed. All data are made available \"as is.\" The Data User should be aware, however, that data are updated periodically and it is the responsibility of the Data User to check for new versions of the data. The data authors and the repository where these data were obtained shall not be liable for damages resulting from any use or misinterpretation of the data. Thank you.</para>
+      </intellectualRights>
+      <distribution
+      id="10.6073/pasta/7d6bb61d52555a4b91024ad132b479f9" scope="system"
+          system="https://pasta.edirepository.org"><online><url
+        function="information">https://doi.org/10.6073/pasta/7d6bb61d52555a4b91024ad132b479f9</url></online></distribution><coverage>
+         <geographicCoverage>
+            <geographicDescription>Falling Creek Reservoir is located in Vinton, Virginia, USA</geographicDescription>
+            <boundingCoordinates>
+               <westBoundingCoordinate>-79.839249</westBoundingCoordinate>
+               <eastBoundingCoordinate>-79.836009</eastBoundingCoordinate>
+               <northBoundingCoordinate>37.309589</northBoundingCoordinate>
+               <southBoundingCoordinate>37.30266</southBoundingCoordinate>
+            </boundingCoordinates>
+         </geographicCoverage>
+         <geographicCoverage>
+            <geographicDescription>Beaverdam Reservoir is located in Vinton, Virginia, USA</geographicDescription>
+            <boundingCoordinates>
+               <westBoundingCoordinate>-79.824834</westBoundingCoordinate>
+               <eastBoundingCoordinate>-79.813848</eastBoundingCoordinate>
+               <northBoundingCoordinate>37.322865</northBoundingCoordinate>
+               <southBoundingCoordinate>37.311961</southBoundingCoordinate>
+            </boundingCoordinates>
+         </geographicCoverage>
+         <temporalCoverage>
+            <rangeOfDates>
+               <beginDate>
+                  <calendarDate>2014-01-06</calendarDate>
+               </beginDate>
+               <endDate>
+                  <calendarDate>2022-12-31</calendarDate>
+               </endDate>
+            </rangeOfDates>
+         </temporalCoverage>
+      </coverage>
+      <maintenance>
+         <description>ongoing</description>
+      </maintenance>
+      <contact>
+         <individualName>
+            <givenName>Cayelan</givenName>
+            <givenName>C.</givenName>
+            <surName>Carey</surName>
+         </individualName>
+         <organizationName>Virginia Tech</organizationName>
+         <electronicMailAddress>cayelan@vt.edu</electronicMailAddress>
+         <userId
+        directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+      </contact>
+      <publisher>
+         <organizationName>Environmental Data Initiative</organizationName>
+         <electronicMailAddress>info@edirepository.org</electronicMailAddress>
+         <onlineUrl>https://edirepository.org</onlineUrl>
+         <userId
+          directory="https://ror.org">0330j0z60</userId>
+      </publisher>
+      <pubPlace>Environmental Data Initiative</pubPlace>
+      <methods>
+         <methodStep>
+            <description>
+               <para>We measured ice cover at Falling Creek Reservoir (FCR) beginning in the winter of 2013-2014 and Beaverdam Reservoir (BVR) beginning in the winter of 2020-2021. We defined ice cover as the presence of ice (any thickness) covering more than 50% of the East-West diameter of the deep hole of FCR or BVR, as could be ascertained by a visual observer standing at the catwalk at the center point of the dam of the reservoir looking in the North direction (FCR) or at the boat launch looking in the North direction (BVR). This ice cover metric should only be applied for the deep hole of the two reservoirs because it may not be always representative of ice cover on the shallow upstream arm of the reservoirs. However, we can confirm from hiking around FCR on four sampling days with complete ice cover at the deep hole during the monitoring period that the ice coverage at the deep hole was the same as upstream and throughout the reservoir as a whole.</para>
+               <para>Carey received daily ice observations for FCR from Western Virginia Water Authority (WVWA) reservoir water treatment operators on site during most of 2013-2016. After winter 2016, reservoir water treatment operators were not consistently at FCR and thus visual observations from WVWA staff became sporadic. During winter 2017-2021, there were occasional visual observations from members of the Carey Lab at Virginia Tech on FCR or BVR sampling days or WVWA staff. In winters 2021-2022, we added in a new method of visual observation at FCR by taking automated photos of the reservoir with an ice camera (GardePro A3S Trail Game Camera 24MP, Guangdong, China). Two cameras were deployed on the end of FCR’s catwalk, with one facing in the Northwest direction and the other facing in the Southwest direction; both took one photo every hour. We used these data to validate the ice cover dates.</para>
+               <para>If visual observation data were not available, we used three alternate methods to determine ice cover. First, we used water temperature data from thermistors deployed at multiple depths in FCR from 2018-2022 (Carey et al. 2023b) or thermistors in BVR from 2020-2022 as well as HOBO temperature loggers deployed at 1-m depth resolution at the same BVR deep hole site in 2016-2018 (Carey et al. 2023a) to check for near-zero temperatures at the surface of the water column and inverse thermal stratification, which signified the presence of ice. Following Wetzel (2001), inverse stratification is easily disrupted by a small amount of wind, so if inverse stratification occurred amidst measurable wind at the reservoir (see Carey and Breef-Pilz 2023 for wind data), then we classified that period as having ice cover.</para>
+               <para>Second, the water temperature data were verified by looking at data from a research-grade meteorological station deployed on FCR's dam. The meteorological station had an upwelling shortwave radiation sensor deployed on the catwalk over the reservoir (see Carey and Breef-Pilz 2023). During periods of ice cover, the upwelling radiation exhibited higher radiation values because of the reflection of light off the ice during daylight hours, which was used to identify days of ice cover at FCR's deep hole. We also referred to the albedo data (upwelling shortwave radiation/downwelling shortwave radiation) as a check on cloudy days (Carey and Breef-Pilz 2023).</para>
+               <para>Third, the water temperature data were also verified by looking at dissolved oxygen concentrations measured by sensors deployed at the deep hole at 1.6 m, 5 m, and 9 m depths in FCR and 7.5 m, 1.5 m, and 0.5 m above the sediments at BVR (Carey et al. 2023a,b). During periods with more than 1 day of ice cover, dissolved oxygen depletion at depth was noticeable, which indicated inverse stratification.</para>
+               <para>Years without any data indicate that no ice was detected during those winters after the onset of data collection.</para>
+               <para>While these methods are not perfect, they represented the most robust way possible to maintain a daily ice cover record over time given the data available. Data flags are conservative and indicate ice periods without visual observations or additional dissolved oxygen data for double verification.</para>
+               <para>References: Carey, C.C. and A. Breef-Pilz. 2023. Time series of high-frequency meteorological data at Falling Creek Reservoir, Virginia, USA 2015-2022 ver 7. Environmental Data Initiative. https://doi.org/10.6073/pasta/f3f97c7fdd287c29084bf52fc759a801 (Accessed 2023-07-20).</para>
+               <para>Carey, C.C., A. Breef-Pilz, B.J. Bookout, R.P. McClure, and J.H. Wynne. 2023a. Time series of high-frequency sensor data measuring water temperature, dissolved oxygen, conductivity, specific conductance, total dissolved solids, chlorophyll a, phycocyanin, fluorescent dissolved organic matter, and turbidity at discrete depths in Beaverdam Reservoir, Virginia, USA in 2016-2022 ver 3. Environmental Data Initiative. https://doi.org/10.6073/pasta/4182de376fde52e15d493fdd9f26d0c7 (Accessed 2023-07-20).</para>
+               <para>Carey, C.C., A. Breef-Pilz, and W.M. Woelmer. 2023b. Time series of high-frequency sensor data measuring water temperature, dissolved oxygen, pressure, conductivity, specific conductance, total dissolved solids, chlorophyll a, phycocyanin, fluorescent dissolved organic matter, and turbidity at discrete depths in Falling Creek Reservoir, Virginia, USA in 2018-2022 ver 7. Environmental Data Initiative. https://doi.org/10.6073/pasta/f6bb4f5f602060dec6652ff8eb555082 (Accessed 2023-07-20).</para>
+               <para>Wetzel, R.G. 2001. Limnology, 3rd edition. Academic Press, New York.</para>
+            </description>
+         </methodStep>
+      </methods>
+      <project>
+         <title>Collaborative Research: Consequences of changing oxygen availability for carbon cycling in freshwater ecosystems</title>
+         <personnel>
+            <individualName>
+               <givenName>Cayelan</givenName>
+               <givenName>C.</givenName>
+               <surName>Carey</surName>
+            </individualName>
+            <organizationName>Virginia Tech</organizationName>
+            <electronicMailAddress>cayelan@vt.edu</electronicMailAddress>
+            <userId
+            directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+            <role>Principal Investigator</role>
+         </personnel>
+         <funding>National Science Foundation 1753639</funding>
+         <relatedProject>
+            <title>No project title to report</title>
+            <personnel>
+               <individualName>
+                  <givenName>Cayelan</givenName>
+                  <givenName>C.</givenName>
+                  <surName>Carey</surName>
+               </individualName>
+               <organizationName>Virginia Tech</organizationName>
+               <electronicMailAddress>cayelan@vt.edu</electronicMailAddress>
+               <userId
+            directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+               <role>Principal Investigator</role>
+            </personnel>
+            <funding>Western Virginia Water Authority</funding>
+         </relatedProject>
+         <relatedProject>
+            <title>Collaborative Research: CIBR: Cyberinfrastructure Enabling End-to-End Workflows for Aquatic Ecosystem Forecasting</title>
+            <personnel>
+               <individualName>
+                  <givenName>Cayelan</givenName>
+                  <givenName>C.</givenName>
+                  <surName>Carey</surName>
+               </individualName>
+               <organizationName>Virginia Tech</organizationName>
+               <electronicMailAddress>cayelan@vt.edu</electronicMailAddress>
+               <userId
+            directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+               <role>Principal Investigator</role>
+            </personnel>
+            <funding>National Science Foundation 1933016</funding>
+         </relatedProject>
+         <relatedProject>
+            <title>Collaborative Research: CIBR: Cyberinfrastructure Enabling End-to-End Workflows for Aquatic Ecosystem Forecasting</title>
+            <personnel>
+               <individualName>
+                  <givenName>Renato</givenName>
+                  <givenName>J.</givenName>
+                  <surName>Figueiredo</surName>
+               </individualName>
+               <organizationName>University of Florida</organizationName>
+               <electronicMailAddress>renato@ece.ufl.edu</electronicMailAddress>
+               <userId
+            directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+               <role>Principal Investigator</role>
+            </personnel>
+            <funding>National Science Foundation DBI-1933102</funding>
+         </relatedProject>
+         <relatedProject>
+            <title>LTREB: Integrating real-time open data pipelines and forecasting to quantify ecosystem predictability at day to decadal scales</title>
+            <personnel>
+               <individualName>
+                  <givenName>Cayelan</givenName>
+                  <givenName>C.</givenName>
+                  <surName>Carey</surName>
+               </individualName>
+               <organizationName>Virginia Tech</organizationName>
+               <electronicMailAddress>cayelan@vt.edu</electronicMailAddress>
+               <userId
+            directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+               <role>Principal Investigator</role>
+            </personnel>
+            <funding>National Science Foundation 2327030</funding>
+         </relatedProject>
+         <relatedProject>
+            <title>Collaborative Research: URoL:ASC: Applying rules of life to forecast emergent behavior of phytoplankton and advance water quality management</title>
+            <personnel>
+               <individualName>
+                  <givenName>Cayelan</givenName>
+                  <givenName>C.</givenName>
+                  <surName>Carey</surName>
+               </individualName>
+               <organizationName>Virginia Tech</organizationName>
+               <electronicMailAddress>cayelan@vt.edu</electronicMailAddress>
+               <userId
+      directory="https://orcid.org">https://orcid.org/0000-0001-8835-4476</userId>
+               <role>Principal Investigator</role>
+            </personnel>
+            <funding>National Science Foundation 2318861</funding>
+         </relatedProject>
+      </project>
+      <dataTable
+      id="ebfaad16975326a7b874a21beb50c151" scope="document"
+          system="https://pasta.edirepository.org">
+         <entityName>Ice_Data_2013_2022updated.csv</entityName>
+         <entityDescription>Ice-on and ice-off data recorded for Falling Creek Reservoir and Beaverdam Reservoir during 2013-2022</entityDescription>
+         <physical>
+            <objectName>Ice_Data_2013_2022updated.csv</objectName>
+            <size
+          unit="bytes">2759</size>
+            <authentication
+              method="MD5">fcc14311706e8b908a766b7ef79af5cd</authentication>
+            <dataFormat>
+               <textFormat>
+                  <numHeaderLines>1</numHeaderLines>
+                  <recordDelimiter>\n</recordDelimiter>
+                  <attributeOrientation>column</attributeOrientation>
+                  <simpleDelimited>
+                     <fieldDelimiter>,</fieldDelimiter>
+                  </simpleDelimited>
+               </textFormat>
+            </dataFormat>
+            <distribution>
+               <online>
+                  <url
+                    function="download">https://pasta.lternet.edu/package/data/eml/edi/456/5/ebfaad16975326a7b874a21beb50c151</url>
+               </online>
+            </distribution>
+         </physical>
+         <attributeList>
+            <attribute>
+               <attributeName>Reservoir</attributeName>
+               <attributeDefinition>Three-letter code corresponding to sampled reservoir; FCR=Falling Creek Reservoir, BVR=Beaverdam Reservoir</attributeDefinition>
+               <storageType>string</storageType>
+               <measurementScale>
+                  <nominal>
+                     <nonNumericDomain>
+                        <textDomain>
+                           <definition>Three-letter code corresponding to sampled reservoir; FCR=Falling Creek Reservoir, BVR=Beaverdam Reservoir</definition>
+                        </textDomain>
+                     </nonNumericDomain>
+                  </nominal>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>Site</attributeName>
+               <attributeDefinition>Sampling site within each reservoir; 50=deepest site near dam</attributeDefinition>
+               <storageType>float</storageType>
+               <measurementScale>
+                  <ratio>
+                     <unit>
+                        <standardUnit>dimensionless</standardUnit>
+                     </unit>
+                     <numericDomain>
+                        <numberType>natural</numberType>
+                        <bounds>
+                           <minimum
+                    exclusive="false">50</minimum>
+                           <maximum
+                    exclusive="false">50</maximum>
+                        </bounds>
+                     </numericDomain>
+                  </ratio>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>Date</attributeName>
+               <attributeDefinition>Date of ice-on or ice-off</attributeDefinition>
+               <storageType>date</storageType>
+               <measurementScale>
+                  <dateTime>
+                     <formatString>YYYY-MM-DD</formatString>
+                     <dateTimeDomain/>
+                  </dateTime>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>Year</attributeName>
+               <attributeDefinition>Year of observation</attributeDefinition>
+               <storageType>date</storageType>
+               <measurementScale>
+                  <dateTime>
+                     <formatString>YYYY</formatString>
+                     <dateTimeDomain/>
+                  </dateTime>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>DayOfYear</attributeName>
+               <attributeDefinition>Date of observation</attributeDefinition>
+               <storageType>date</storageType>
+               <measurementScale>
+                  <dateTime>
+                     <formatString>DD</formatString>
+                     <dateTimeDomain/>
+                  </dateTime>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>IceOn</attributeName>
+               <attributeDefinition>This value indicates if ice-on occurred</attributeDefinition>
+               <storageType>float</storageType>
+               <measurementScale>
+                  <ratio>
+                     <unit>
+                        <standardUnit>dimensionless</standardUnit>
+                     </unit>
+                     <numericDomain>
+                        <numberType>whole</numberType>
+                        <bounds>
+                           <minimum
+                    exclusive="false">0</minimum>
+                           <maximum
+                    exclusive="false">1</maximum>
+                        </bounds>
+                     </numericDomain>
+                  </ratio>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>IceOff</attributeName>
+               <attributeDefinition>This value indicates if ice-off occurred</attributeDefinition>
+               <storageType>float</storageType>
+               <measurementScale>
+                  <ratio>
+                     <unit>
+                        <standardUnit>dimensionless</standardUnit>
+                     </unit>
+                     <numericDomain>
+                        <numberType>whole</numberType>
+                        <bounds>
+                           <minimum
+                    exclusive="false">0</minimum>
+                           <maximum
+                    exclusive="false">1</maximum>
+                        </bounds>
+                     </numericDomain>
+                  </ratio>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>Method</attributeName>
+               <attributeDefinition>Code for method used to determine ice-on or ice-off; V=Visual observation of ice presence or absence; T=Temperature Inverse Stratification method (see methods for details)</attributeDefinition>
+               <storageType>string</storageType>
+               <measurementScale>
+                  <nominal>
+                     <nonNumericDomain>
+                        <textDomain>
+                           <definition>Code for method used to determine ice-on or ice-off; V=Visual observation of ice presence or absence; T=Temperature Inverse Stratification method (see methods for details)</definition>
+                        </textDomain>
+                     </nonNumericDomain>
+                  </nominal>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+            <attribute>
+               <attributeName>Flag_IceValue</attributeName>
+               <attributeDefinition>Flag for ice-on or ice-off; 0=no flag; 1=indicate ice periods without visual observations or additional dissolved oxygen data for double verification of ice</attributeDefinition>
+               <storageType>float</storageType>
+               <measurementScale>
+                  <ratio>
+                     <unit>
+                        <standardUnit>dimensionless</standardUnit>
+                     </unit>
+                     <numericDomain>
+                        <numberType>whole</numberType>
+                        <bounds>
+                           <minimum
+                    exclusive="false">0</minimum>
+                           <maximum exclusive="false">1</maximum>
+                        </bounds>
+                     </numericDomain>
+                  </ratio>
+               </measurementScale>
+               <missingValueCode>
+                  <code>NA</code>
+                  <codeExplanation>value is missing</codeExplanation>
+               </missingValueCode>
+            </attribute>
+         </attributeList>
+         <numberOfRecords>79</numberOfRecords>
+      </dataTable>
+   </dataset>
+   <additionalMetadata>
+      <metadata>
+         <emlEditor>
+            <app>EMLassemblyline</app>
+            <release>3.5.5</release>
+         </emlEditor>
+      </metadata>
+   </additionalMetadata>
+</eml:eml>

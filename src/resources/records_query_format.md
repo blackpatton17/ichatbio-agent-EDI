@@ -1,6 +1,6 @@
 ## PASTA+ Search Query Format (JSON-based)
 
-This document defines how to construct a **JSON-based query format** for use by an LLM agent to interface with the PASTA+ (Environmental Data Initiative) EML search API. The format supports both full-text queries and exact filtering.
+This document defines how to construct a **JSON-based query format** for use by an LLM agent to interface with the PASTA+ (Environmental Data Initiative) EML search API. The format supports both full-text queries and exact filtering. The intention of this query is get to start with a research and a detailed record metadata analysis will be provided from another entrypoint.
 
 ---
 
@@ -38,14 +38,18 @@ GET https://pasta.lternet.edu/package/search/eml
 #### Single-Value Fields (used only in `fq`, exact or range match):
 
 - `abstract`
+    - Required field.
+- `title`
+    - Required field.
 - `begindate`
-- `doi`
 - `enddate`
 - `funding`
 - `geographicdescription`
-- `id`
-- `methods`
+- `methods` 
+    - Note: don't use `methods` field except for use specifically asked so, since this will extremly increase the cost.
 - `packageid`
+    - Required field for simple summary,
+- `doi`
 - `pubdate`
 - `responsibleParties`
 - `scope`  
@@ -54,7 +58,6 @@ GET https://pasta.lternet.edu/package/search/eml
 - `singledate`
 - `site`
 - `taxonomic`
-- `title`
 
 #### Multi-Value Fields (can appear in `q` or as repeated `fq`):
 

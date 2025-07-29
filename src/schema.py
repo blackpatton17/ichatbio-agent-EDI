@@ -105,3 +105,11 @@ class AnalysisRequestModel(BaseModel):
         description="The unique identifier of the record to fetch from the EDI repository.",
         example="edi.456.5"
     )
+
+# --------------- Code Generation Request Model ---------------
+class CodeGenerationRequestModel(BaseModel):
+    id: str = Field(
+        description="The unique identifier of the record to generate code for.",
+        example="edi.456.5"
+    )
+    

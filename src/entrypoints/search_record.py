@@ -1,9 +1,8 @@
 import importlib.resources
 
 import instructor
-from instructor import AsyncInstructor
 from instructor.exceptions import InstructorRetryException
-from openai import AsyncOpenAI, Client
+from openai import AsyncOpenAI
 from pydantic import Field, BaseModel
 from tenacity import AsyncRetrying
 

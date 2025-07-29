@@ -1,34 +1,18 @@
-import importlib.resources
-
-import instructor
-from instructor import AsyncInstructor
-from instructor.exceptions import InstructorRetryException
-from openai import AsyncOpenAI, Client
-from pydantic import Field, BaseModel
 from tenacity import AsyncRetrying
 
 import requests
-import json
 import os
 import xml.etree.ElementTree as ET
-from pathlib import Path
-from io import TextIOWrapper
 
 from typing import Dict
 
 from ichatbio.agent_response import ResponseContext
 from ichatbio.types import AgentEntrypoint
-# from ..schema import IDigBioRecordsApiParameters
-# from ..util import ai
 
 from schema import AnalysisRequestModel
 from util.ai import AIGenerationException, StopOnTerminalErrorOrMaxAttempts
 from util.s3 import S3Client
 from util.xml_to_dict import xml_to_dict
-
-import json
-import re
-import boto3
     
 
 entrypoint = AgentEntrypoint(

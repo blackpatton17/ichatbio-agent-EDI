@@ -26,7 +26,7 @@ export OPENAI_API_KEY=<your key>
 
 test agent
 ```py
-pytest -s tests/test_agent.py
+pytest -s tests/test_search.py
 ```
 
 

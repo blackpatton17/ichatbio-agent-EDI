@@ -105,11 +105,3 @@ class AnalysisRequestModel(BaseModel):
         description="The unique identifier of the record to fetch from the EDI repository.",
         example="edi.456.5"
     )
-    url: str = Field(
-        description="The URL of the record to fetch from the EDI repository.",
-        example="https://pasta.lternet.edu/package/metadata/eml/edi/456/5"
-    )
-    fields: list[str] = Field(
-        default_factory=list,
-        description="List of metadata fields or sections to analyze (e.g., ['title', 'abstract', 'creator', 'methods'])."
-    )

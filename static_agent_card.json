@@ -1,26 +1,34 @@
 {
-    "capabilities": {
-        "streaming": true
+  "capabilities": {
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "description": "Searches datasets from PASTA+ EDI repository.",
+  "name": "EDI Dataset Agent",
+  "protocolVersion": "0.2.5",
+  "skills": [
+    {
+      "description": "{\"description\": \"Searches EDI for datasets using metadata or keyword search.\"}",
+      "id": "search_dataset",
+      "name": "search_dataset",
+      "tags": [
+        "ichatbio"
+      ]
     },
-    "defaultInputModes": [
-        "text/plain"
-    ],
-    "defaultOutputModes": [
-        "text/plain"
-    ],
-    "description": "Searches datasets from PASTA+ EDI repository.",
-    "name": "EDI Dataset Agent",
-    "protocolVersion": "0.2.5",
-    "skills": [
-        {
-            "description": "{\"description\": \"Searches EDI for datasets using metadata or keyword search.\"}",
-            "id": "search_dataset",
-            "name": "search_dataset",
-            "tags": [
-                "ichatbio"
-            ]
-        }
-    ],
-    "url": "http://54.71.171.66:8000",
-    "version": "1"
+    {
+      "description": "{\"description\": \"Query a detailed dataset's metadata from the EDI repository using a natural language request.\", \"parameters\": {\"properties\": {\"id\": {\"description\": \"The unique identifier of the record to fetch from the EDI repository.\", \"example\": \"edi.456.5\", \"title\": \"Id\", \"type\": \"string\"}}, \"required\": [\"id\"], \"title\": \"AnalysisRequestModel\", \"type\": \"object\"}}",
+      "id": "analyze_dataset",
+      "name": "analyze_dataset",
+      "tags": [
+        "ichatbio"
+      ]
+    }
+  ],
+  "url": "None",
+  "version": "1"
 }

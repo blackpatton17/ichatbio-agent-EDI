@@ -1,9 +1,8 @@
 import importlib.resources
 
 import instructor
-from instructor import AsyncInstructor
 from instructor.exceptions import InstructorRetryException
-from openai import AsyncOpenAI, Client
+from openai import AsyncOpenAI
 from pydantic import Field, BaseModel
 from tenacity import AsyncRetrying
 
@@ -11,15 +10,13 @@ import requests
 import json
 import os
 import xml.etree.ElementTree as ET
-from pathlib import Path
-from io import TextIOWrapper
 
 from ichatbio.agent_response import ResponseContext
 from ichatbio.types import AgentEntrypoint
 # from ..schema import IDigBioRecordsApiParameters
 # from ..util import ai
 
-from schema import EDIQueryModel, PASTAQuery, LLMQueryParamResponseModel, LLMSummarizationResponseModel
+from schema import EDIQueryModel, LLMQueryParamResponseModel, LLMSummarizationResponseModel
 from util.ai import AIGenerationException, StopOnTerminalErrorOrMaxAttempts
 import json
 import re

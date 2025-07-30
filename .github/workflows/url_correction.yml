@@ -5,6 +5,9 @@ on:
     branches:
       - prod
 
+permissions:
+  contents: write
+
 jobs:
   fix-url:
     runs-on: ubuntu-latest

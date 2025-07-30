@@ -1,0 +1,39 @@
+name: Fix Agent URL if Missing http://
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  fix-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Ensure URL starts with http://
+        run: |
+          URL=$(jq -r '.url' static_agent_card.json)
+          echo "Found URL: $URL"
+          if [[ "$URL" != http://* ]]; then
+            echo "URL does not start with http:// — fixing..."
+            FIXED_URL="http://$URL"
+            jq --arg url "$FIXED_URL" '.url = $url' static_agent_card.json > tmp.json && mv tmp.json static_agent_card.json
+          else
+            echo "URL already valid"
+          fi
+
+      - name: Commit and push changes if modified
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add static_agent_card.json
+            git commit -m "fix: ensure URL starts with http://"
+            git push
+          else
+            echo "No changes needed"
+          fi

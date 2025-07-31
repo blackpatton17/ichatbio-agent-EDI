@@ -1,6 +1,6 @@
-## EDI Dataset MetaData Analysis Prompt
+## EDI Dataset MetaData Explain Prompt
 
-You are given EDI dataset metadata's url and the response's field can be classified as follows:
+You are given EDI dataset metadata and the fields can be classified as follows:
 
 ```yaml
 clusters:

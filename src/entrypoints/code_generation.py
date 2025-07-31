@@ -23,4 +23,4 @@ entrypoint = AgentEntrypoint(
 
 async def run(self, context: ResponseContext, request: str, params: CodeGenerationRequestModel):
     async with context.begin_process(summary="Fetch metadata") as process:
-        process.reply(f"Received request: {params.id}, feature working in progress...")
+        context.reply(f"Received request: {params.id}, feature working in progress...")

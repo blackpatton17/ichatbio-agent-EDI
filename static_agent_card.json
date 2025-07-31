@@ -22,8 +22,8 @@
     },
     {
       "description": "{\"description\": \"Query a detailed dataset's metadata from the EDI repository using a natural language request.\", \"parameters\": {\"properties\": {\"id\": {\"description\": \"The unique identifier of the record to fetch from the EDI repository.\", \"example\": \"edi.456.5\", \"title\": \"Id\", \"type\": \"string\"}}, \"required\": [\"id\"], \"title\": \"AnalysisRequestModel\", \"type\": \"object\"}}",
-      "id": "analyze_dataset",
-      "name": "analyze_dataset",
+      "id": "fetch_dataset_metadata",
+      "name": "fetch_dataset_metadata",
       "tags": [
         "ichatbio"
       ]

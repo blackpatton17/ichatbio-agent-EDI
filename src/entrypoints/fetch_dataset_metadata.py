@@ -39,7 +39,7 @@ async def run(self, context: ResponseContext, request: str, params: AnalysisRequ
                     metadata = await _fetch_package_metadata(url)
                 except Exception as e:
                     await process.log(f"Error fetching metadata: {e}")
-                    await process.reply(f"Error fetching metadata: {e}")
+                    await context.reply(f"Error fetching metadata: {e}")
                     return
                 await process.log(f"Fetched metadata")
                 s3_client.upload_json(s3_key, metadata)
@@ -53,7 +53,7 @@ async def run(self, context: ResponseContext, request: str, params: AnalysisRequ
             )
             await context.reply("Metadata processed successfully.")
         except Exception as e:
-            await process.reply(f"Error with S3 operations: {e}")
+            await context.reply(f"Error with S3 operations: {e}")
             return
 
 async def _fetch_package_metadata(url: str) -> Dict:
@@ -67,8 +67,16 @@ async def _fetch_package_metadata(url: str) -> Dict:
         retry_error_cls=AIGenerationException
     ):
         with attempt:
-            response = requests.get(url)
-            if response.status_code != 200:
-                raise AIGenerationException(f"Failed to fetch data from EDI: {response.status_code} {response.text}")
-            return xml_to_dict(ET.fromstring(response.text))
+            try:
+                response = requests.get(url)
+                if response.status_code != 200:
+                    raise AIGenerationException(f"Failed to fetch data from EDI: {response.status_code} {response.text}")
+                return xml_to_dict(response.text)
+            except Exception as e:
+                # Log the full exception for debugging
+                import traceback
+                traceback_str = traceback.format_exc()
+                print(f"Exception in _fetch_package_metadata: {e}\n{traceback_str}")
+                # Raise as AIGenerationException for tenacity to handle
+                raise AIGenerationException(str(e))
 

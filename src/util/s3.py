@@ -7,8 +7,8 @@ class S3Client:
         # self.endpoint = endpoint or os.environ.get("My_OSN_Endpoint")
         # self.access_key = access_key or os.environ.get("My_OSN_Bucket_ACCESS_KEY")
         # self.secret_key = secret_key or os.environ.get("My_OSN_Bucket_SECRET_KEY")
-        self.bucket_name = bucket_name or os.environ.get("S3_BUCKET_NAME")
         self.endpoint = endpoint or os.environ.get("S3_ENDPOINT")
+        self.bucket_name = bucket_name or os.environ.get("S3_BUCKET")
         self.access_key = access_key or os.environ.get("S3_ACCESS_KEY")
         self.secret_key = secret_key or os.environ.get("S3_SECRET_KEY")
         self.client = boto3.client(

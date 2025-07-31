@@ -16,7 +16,7 @@ from ichatbio.types import AgentEntrypoint
 # from ..schema import IDigBioRecordsApiParameters
 # from ..util import ai
 
-from schema import EDIQueryModel, LLMQueryParamResponseModel, LLMSummarizationResponseModel
+from schema import PASTAQuery, EDIQueryModel, LLMQueryParamResponseModel, LLMSummarizationResponseModel
 from util.ai import AIGenerationException, StopOnTerminalErrorOrMaxAttempts
 import json
 import re
@@ -114,7 +114,7 @@ async def _fetch_edi_data(url: str) -> requests.Response:
             return response
 
 
-async def _generate_records_search_parameters(request: str) -> (PASTAQuery, str):
+async def _generate_records_search_parameters(request: str) -> tuple[PASTAQuery, str]:
     # Use custom endpoint and token if provided, else fallback to OpenAI defaults
     # api_key = os.getenv("GITHUB_PLAYGROUND_KEY")
     # base_url = "https://models.github.ai/inference"

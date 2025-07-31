@@ -1,0 +1,2879 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "packageId": {
+      "type": "string"
+    },
+    "system": {
+      "type": "string"
+    },
+    "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation": {
+      "type": "string"
+    },
+    "access": {
+      "type": "object",
+      "properties": {
+        "authSystem": {
+          "type": "string"
+        },
+        "order": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "allow": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "principal": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "permission": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            },
+            "required": [
+              "permission",
+              "principal"
+            ]
+          }
+        }
+      },
+      "required": [
+        "allow",
+        "authSystem",
+        "order",
+        "scope",
+        "system"
+      ]
+    },
+    "dataset": {
+      "type": "object",
+      "properties": {
+        "alternateIdentifier": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "system",
+            "text"
+          ]
+        },
+        "title": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ]
+        },
+        "creator": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "individualName": {
+                "type": "object",
+                "properties": {
+                  "givenName": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "surName": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  }
+                },
+                "required": [
+                  "givenName",
+                  "surName"
+                ]
+              },
+              "organizationName": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "electronicMailAddress": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "userId": {
+                "type": "object",
+                "properties": {
+                  "directory": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "directory",
+                  "text"
+                ]
+              }
+            },
+            "required": [
+              "electronicMailAddress",
+              "individualName",
+              "organizationName",
+              "userId"
+            ]
+          }
+        },
+        "pubDate": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ]
+        },
+        "abstract": {
+          "type": "object",
+          "properties": {
+            "para": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          },
+          "required": [
+            "para"
+          ]
+        },
+        "keywordSet": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "keyword": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              },
+              "keywordThesaurus": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            },
+            "required": [
+              "keyword"
+            ]
+          }
+        },
+        "additionalInfo": {
+          "type": "object",
+          "properties": {
+            "para": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          },
+          "required": [
+            "para"
+          ]
+        },
+        "intellectualRights": {
+          "type": "object",
+          "properties": {
+            "para": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          },
+          "required": [
+            "para"
+          ]
+        },
+        "distribution": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "system": {
+              "type": "string"
+            },
+            "online": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "object",
+                  "properties": {
+                    "function": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "function",
+                    "text"
+                  ]
+                }
+              },
+              "required": [
+                "url"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "online",
+            "scope",
+            "system"
+          ]
+        },
+        "coverage": {
+          "type": "object",
+          "properties": {
+            "geographicCoverage": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "geographicDescription": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  },
+                  "boundingCoordinates": {
+                    "type": "object",
+                    "properties": {
+                      "westBoundingCoordinate": {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      },
+                      "eastBoundingCoordinate": {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      },
+                      "northBoundingCoordinate": {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      },
+                      "southBoundingCoordinate": {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "eastBoundingCoordinate",
+                      "northBoundingCoordinate",
+                      "southBoundingCoordinate",
+                      "westBoundingCoordinate"
+                    ]
+                  }
+                },
+                "required": [
+                  "boundingCoordinates",
+                  "geographicDescription"
+                ]
+              }
+            },
+            "temporalCoverage": {
+              "type": "object",
+              "properties": {
+                "rangeOfDates": {
+                  "type": "object",
+                  "properties": {
+                    "beginDate": {
+                      "type": "object",
+                      "properties": {
+                        "calendarDate": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "calendarDate"
+                      ]
+                    },
+                    "endDate": {
+                      "type": "object",
+                      "properties": {
+                        "calendarDate": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "calendarDate"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "beginDate",
+                    "endDate"
+                  ]
+                }
+              },
+              "required": [
+                "rangeOfDates"
+              ]
+            }
+          },
+          "required": [
+            "geographicCoverage",
+            "temporalCoverage"
+          ]
+        },
+        "maintenance": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          },
+          "required": [
+            "description"
+          ]
+        },
+        "contact": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "individualName": {
+                "type": "object",
+                "properties": {
+                  "givenName": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  },
+                  "surName": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  }
+                },
+                "required": [
+                  "givenName",
+                  "surName"
+                ]
+              },
+              "organizationName": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "electronicMailAddress": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "userId": {
+                "type": "object",
+                "properties": {
+                  "directory": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "directory",
+                  "text"
+                ]
+              }
+            },
+            "required": [
+              "electronicMailAddress",
+              "individualName",
+              "organizationName",
+              "userId"
+            ]
+          }
+        },
+        "publisher": {
+          "type": "object",
+          "properties": {
+            "organizationName": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "electronicMailAddress": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "onlineUrl": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "userId": {
+              "type": "object",
+              "properties": {
+                "directory": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "directory",
+                "text"
+              ]
+            }
+          },
+          "required": [
+            "electronicMailAddress",
+            "onlineUrl",
+            "organizationName",
+            "userId"
+          ]
+        },
+        "pubPlace": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ]
+        },
+        "methods": {
+          "type": "object",
+          "properties": {
+            "methodStep": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "object",
+                    "properties": {
+                      "markdown": {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      },
+                      "para": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        }
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "dataSource": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      },
+                      "creator": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "individualName": {
+                                  "type": "object",
+                                  "properties": {
+                                    "givenName": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "text": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "text"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "surName": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "givenName",
+                                    "surName"
+                                  ]
+                                },
+                                "organizationName": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                },
+                                "electronicMailAddress": {
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "text"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                },
+                                "userId": {
+                                  "type": "object",
+                                  "properties": {
+                                    "directory": {
+                                      "type": "string"
+                                    },
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "directory",
+                                    "text"
+                                  ]
+                                },
+                                "address": {
+                                  "type": "object",
+                                  "properties": {
+                                    "deliveryPoint": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "text": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "text"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "city": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "administrativeArea": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "postalCode": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "country": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "scope": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "administrativeArea",
+                                    "city",
+                                    "deliveryPoint",
+                                    "postalCode"
+                                  ]
+                                },
+                                "phone": {
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "phonetype": {
+                                          "type": "string"
+                                        },
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "phonetype": {
+                                            "type": "string"
+                                          },
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "phonetype",
+                                          "text"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                },
+                                "onlineUrl": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                },
+                                "positionName": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                },
+                                "scope": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "individualName": {
+                                "type": "object",
+                                "properties": {
+                                  "givenName": {
+                                    "anyOf": [
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "text"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "surName": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "givenName",
+                                  "surName"
+                                ]
+                              },
+                              "address": {
+                                "type": "object",
+                                "properties": {
+                                  "deliveryPoint": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "text"
+                                        ]
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "city": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  },
+                                  "administrativeArea": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  },
+                                  "postalCode": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  },
+                                  "country": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "administrativeArea",
+                                  "city",
+                                  "country",
+                                  "deliveryPoint",
+                                  "postalCode"
+                                ]
+                              },
+                              "electronicMailAddress": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "userId": {
+                                "type": "object",
+                                "properties": {
+                                  "directory": {
+                                    "type": "string"
+                                  },
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "directory",
+                                  "text"
+                                ]
+                              },
+                              "organizationName": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "phone": {
+                                "anyOf": [
+                                  {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "phonetype": {
+                                          "type": "string"
+                                        },
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "phonetype"
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "phonetype": {
+                                        "type": "string"
+                                      },
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "phonetype",
+                                      "text"
+                                    ]
+                                  }
+                                ]
+                              },
+                              "onlineUrl": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "distribution": {
+                        "type": "object",
+                        "properties": {
+                          "online": {
+                            "type": "object",
+                            "properties": {
+                              "onlineDescription": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "url": {
+                                "type": "object",
+                                "properties": {
+                                  "function": {
+                                    "type": "string"
+                                  },
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "onlineDescription",
+                              "url"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "online"
+                        ]
+                      },
+                      "contact": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "individualName": {
+                                  "type": "object",
+                                  "properties": {
+                                    "givenName": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "text": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "text"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "surName": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "givenName",
+                                    "surName"
+                                  ]
+                                },
+                                "organizationName": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                },
+                                "electronicMailAddress": {
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "text"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                },
+                                "userId": {
+                                  "type": "object",
+                                  "properties": {
+                                    "directory": {
+                                      "type": "string"
+                                    },
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "directory",
+                                    "text"
+                                  ]
+                                },
+                                "positionName": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                },
+                                "address": {
+                                  "type": "object",
+                                  "properties": {
+                                    "deliveryPoint": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "text": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "text"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "city": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "administrativeArea": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "postalCode": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "country": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "administrativeArea",
+                                    "city",
+                                    "deliveryPoint",
+                                    "postalCode"
+                                  ]
+                                },
+                                "phone": {
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "phonetype": {
+                                          "type": "string"
+                                        },
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "phonetype": {
+                                            "type": "string"
+                                          },
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "phonetype",
+                                          "text"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                },
+                                "onlineUrl": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "electronicMailAddress"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "positionName": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "address": {
+                                "type": "object",
+                                "properties": {
+                                  "deliveryPoint": {
+                                    "anyOf": [
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "text"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "city": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  },
+                                  "administrativeArea": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  },
+                                  "postalCode": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  },
+                                  "country": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  },
+                                  "scope": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "administrativeArea",
+                                  "city",
+                                  "deliveryPoint",
+                                  "postalCode"
+                                ]
+                              },
+                              "phone": {
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "phonetype": {
+                                        "type": "string"
+                                      },
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "phonetype",
+                                      "text"
+                                    ]
+                                  },
+                                  {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "phonetype": {
+                                          "type": "string"
+                                        },
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "phonetype",
+                                        "text"
+                                      ]
+                                    }
+                                  }
+                                ]
+                              },
+                              "electronicMailAddress": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "onlineUrl": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "individualName": {
+                                "type": "object",
+                                "properties": {
+                                  "givenName": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "text": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "text"
+                                        ]
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "surName": {
+                                    "type": "object",
+                                    "properties": {
+                                      "text": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "givenName",
+                                  "surName"
+                                ]
+                              },
+                              "organizationName": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "userId": {
+                                "type": "object",
+                                "properties": {
+                                  "directory": {
+                                    "type": "string"
+                                  },
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "directory",
+                                  "text"
+                                ]
+                              },
+                              "system": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "contact",
+                      "creator",
+                      "distribution",
+                      "title"
+                    ]
+                  }
+                },
+                "required": [
+                  "description"
+                ]
+              }
+            }
+          },
+          "required": [
+            "methodStep"
+          ]
+        },
+        "project": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "personnel": {
+              "type": "object",
+              "properties": {
+                "individualName": {
+                  "type": "object",
+                  "properties": {
+                    "givenName": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ]
+                    },
+                    "surName": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "givenName",
+                    "surName"
+                  ]
+                },
+                "organizationName": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                },
+                "electronicMailAddress": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                },
+                "userId": {
+                  "type": "object",
+                  "properties": {
+                    "directory": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "directory",
+                    "text"
+                  ]
+                },
+                "role": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              },
+              "required": [
+                "electronicMailAddress",
+                "individualName",
+                "organizationName",
+                "role",
+                "userId"
+              ]
+            },
+            "funding": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "relatedProject": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                },
+                "personnel": {
+                  "type": "object",
+                  "properties": {
+                    "individualName": {
+                      "type": "object",
+                      "properties": {
+                        "givenName": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          }
+                        },
+                        "surName": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "givenName",
+                        "surName"
+                      ]
+                    },
+                    "organizationName": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ]
+                    },
+                    "electronicMailAddress": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ]
+                    },
+                    "userId": {
+                      "type": "object",
+                      "properties": {
+                        "directory": {
+                          "type": "string"
+                        },
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "directory",
+                        "text"
+                      ]
+                    },
+                    "role": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "electronicMailAddress",
+                    "individualName",
+                    "organizationName",
+                    "role",
+                    "userId"
+                  ]
+                },
+                "funding": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text"
+                  ]
+                }
+              },
+              "required": [
+                "funding",
+                "personnel",
+                "title"
+              ]
+            }
+          },
+          "required": [
+            "funding",
+            "personnel",
+            "relatedProject",
+            "title"
+          ]
+        },
+        "dataTable": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "scope": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "entityName": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "entityDescription": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "physical": {
+                "type": "object",
+                "properties": {
+                  "objectName": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  },
+                  "size": {
+                    "type": "object",
+                    "properties": {
+                      "unit": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text",
+                      "unit"
+                    ]
+                  },
+                  "authentication": {
+                    "type": "object",
+                    "properties": {
+                      "method": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "method",
+                      "text"
+                    ]
+                  },
+                  "dataFormat": {
+                    "type": "object",
+                    "properties": {
+                      "textFormat": {
+                        "type": "object",
+                        "properties": {
+                          "numHeaderLines": {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          "recordDelimiter": {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          "attributeOrientation": {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          "simpleDelimited": {
+                            "type": "object",
+                            "properties": {
+                              "fieldDelimiter": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              },
+                              "quoteCharacter": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "text"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "fieldDelimiter",
+                              "quoteCharacter"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "attributeOrientation",
+                          "numHeaderLines",
+                          "recordDelimiter",
+                          "simpleDelimited"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "textFormat"
+                    ]
+                  },
+                  "distribution": {
+                    "type": "object",
+                    "properties": {
+                      "online": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "object",
+                            "properties": {
+                              "function": {
+                                "type": "string"
+                              },
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "function",
+                              "text"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "online"
+                    ]
+                  }
+                },
+                "required": [
+                  "authentication",
+                  "dataFormat",
+                  "distribution",
+                  "objectName",
+                  "size"
+                ]
+              },
+              "attributeList": {
+                "type": "object",
+                "properties": {
+                  "attribute": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "attributeName": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        },
+                        "attributeDefinition": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        },
+                        "storageType": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        },
+                        "measurementScale": {
+                          "type": "object",
+                          "properties": {
+                            "dateTime": {
+                              "type": "object",
+                              "properties": {
+                                "formatString": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                },
+                                "dateTimeDomain": {
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "dateTimeDomain",
+                                "formatString"
+                              ]
+                            },
+                            "nominal": {
+                              "type": "object",
+                              "properties": {
+                                "nonNumericDomain": {
+                                  "type": "object",
+                                  "properties": {
+                                    "textDomain": {
+                                      "type": "object",
+                                      "properties": {
+                                        "definition": {
+                                          "type": "object",
+                                          "properties": {
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "text"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "definition"
+                                      ]
+                                    },
+                                    "enumeratedDomain": {
+                                      "type": "object",
+                                      "properties": {
+                                        "codeDefinition": {
+                                          "anyOf": [
+                                            {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "code": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "text": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "text"
+                                                    ]
+                                                  },
+                                                  "definition": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "text": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "text"
+                                                    ]
+                                                  }
+                                                },
+                                                "required": [
+                                                  "code",
+                                                  "definition"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "text": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "text"
+                                                  ]
+                                                },
+                                                "definition": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "text": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "text"
+                                                  ]
+                                                }
+                                              },
+                                              "required": [
+                                                "code",
+                                                "definition"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "codeDefinition"
+                                      ]
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "nonNumericDomain"
+                              ]
+                            },
+                            "ratio": {
+                              "type": "object",
+                              "properties": {
+                                "unit": {
+                                  "type": "object",
+                                  "properties": {
+                                    "standardUnit": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "customUnit": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "numericDomain": {
+                                  "type": "object",
+                                  "properties": {
+                                    "numberType": {
+                                      "type": "object",
+                                      "properties": {
+                                        "text": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "text"
+                                      ]
+                                    },
+                                    "bounds": {
+                                      "type": "object",
+                                      "properties": {
+                                        "minimum": {
+                                          "type": "object",
+                                          "properties": {
+                                            "exclusive": {
+                                              "type": "string"
+                                            },
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "exclusive",
+                                            "text"
+                                          ]
+                                        },
+                                        "maximum": {
+                                          "type": "object",
+                                          "properties": {
+                                            "exclusive": {
+                                              "type": "string"
+                                            },
+                                            "text": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "exclusive",
+                                            "text"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "maximum",
+                                        "minimum"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "bounds",
+                                    "numberType"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "numericDomain",
+                                "unit"
+                              ]
+                            }
+                          }
+                        },
+                        "missingValueCode": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "object",
+                              "properties": {
+                                "text": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "text"
+                              ]
+                            },
+                            "codeExplanation": {
+                              "type": "object",
+                              "properties": {
+                                "text": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "text"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "codeExplanation"
+                          ]
+                        },
+                        "methods": {
+                          "type": "object",
+                          "properties": {
+                            "methodStep": {
+                              "type": "object",
+                              "properties": {
+                                "description": {
+                                  "type": "object",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "description"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "methodStep"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "attributeDefinition",
+                        "attributeName",
+                        "measurementScale",
+                        "storageType"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "attribute"
+                ]
+              },
+              "numberOfRecords": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            },
+            "required": [
+              "attributeList",
+              "entityDescription",
+              "entityName",
+              "id",
+              "numberOfRecords",
+              "physical",
+              "scope",
+              "system"
+            ]
+          }
+        },
+        "otherEntity": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "scope": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "entityName": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "entityDescription": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              },
+              "physical": {
+                "type": "object",
+                "properties": {
+                  "objectName": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  },
+                  "size": {
+                    "type": "object",
+                    "properties": {
+                      "unit": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text",
+                      "unit"
+                    ]
+                  },
+                  "authentication": {
+                    "type": "object",
+                    "properties": {
+                      "method": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "method",
+                      "text"
+                    ]
+                  },
+                  "dataFormat": {
+                    "type": "object",
+                    "properties": {
+                      "externallyDefinedFormat": {
+                        "type": "object",
+                        "properties": {
+                          "formatName": {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "formatName"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "externallyDefinedFormat"
+                    ]
+                  },
+                  "distribution": {
+                    "type": "object",
+                    "properties": {
+                      "online": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "object",
+                            "properties": {
+                              "function": {
+                                "type": "string"
+                              },
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "function",
+                              "text"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "online"
+                    ]
+                  }
+                },
+                "required": [
+                  "authentication",
+                  "dataFormat",
+                  "distribution",
+                  "objectName",
+                  "size"
+                ]
+              },
+              "entityType": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            },
+            "required": [
+              "entityDescription",
+              "entityName",
+              "entityType",
+              "id",
+              "physical",
+              "scope",
+              "system"
+            ]
+          }
+        }
+      },
+      "required": [
+        "abstract",
+        "additionalInfo",
+        "alternateIdentifier",
+        "contact",
+        "coverage",
+        "creator",
+        "dataTable",
+        "distribution",
+        "intellectualRights",
+        "keywordSet",
+        "maintenance",
+        "methods",
+        "otherEntity",
+        "project",
+        "pubDate",
+        "pubPlace",
+        "publisher",
+        "title"
+      ]
+    },
+    "additionalMetadata": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "unitList": {
+                "type": "object",
+                "properties": {
+                  "unit": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "multiplierToSI": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "parentSI": {
+                          "type": "string"
+                        },
+                        "unitType": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "text"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "description",
+                        "id",
+                        "multiplierToSI",
+                        "name",
+                        "parentSI",
+                        "unitType"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "unit"
+                ]
+              },
+              "emlEditor": {
+                "type": "object",
+                "properties": {
+                  "app": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  },
+                  "release": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  }
+                },
+                "required": [
+                  "app",
+                  "release"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "metadata"
+        ]
+      }
+    }
+  },
+  "required": [
+    "access",
+    "additionalMetadata",
+    "dataset",
+    "packageId",
+    "system",
+    "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation"
+  ]
+}

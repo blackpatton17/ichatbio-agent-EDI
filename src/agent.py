@@ -10,7 +10,7 @@ from ichatbio.agent import IChatBioAgent
 from ichatbio.types import AgentCard, AgentEntrypoint
 from ichatbio.agent_response import ResponseContext
 
-from entrypoints import search_record, analyze_record
+from entrypoints import search_record, fetch_dataset_metadata
 
 from util.ai import AIGenerationException, StopOnTerminalErrorOrMaxAttempts
 
@@ -26,7 +26,7 @@ class EDIAgent(IChatBioAgent):
             icon=None,
             entrypoints=[
                 search_record.entrypoint,
-                analyze_record.entrypoint
+                fetch_dataset_metadata.entrypoint
             ]
         )
 
@@ -39,8 +39,8 @@ class EDIAgent(IChatBioAgent):
         match entrypoint:
             case search_record.entrypoint.id:
                 await search_record.run(self, context, request)
-            case analyze_record.entrypoint.id:
-                await analyze_record.run(self, context, request, params)
+            case fetch_dataset_metadata.entrypoint.id:
+                await fetch_dataset_metadata.run(self, context, request, params)
             case None:
                 await context.error("No entrypoint specified.")
             case _:

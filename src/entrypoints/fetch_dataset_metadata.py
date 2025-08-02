@@ -1,3 +1,4 @@
+from genson import SchemaBuilder
 from tenacity import AsyncRetrying
 
 import requests
@@ -26,12 +27,13 @@ async def run(self, context: ResponseContext, request: str, params: AnalysisRequ
         await process.log(f"Received request: {params.id}")
         bucket_name = os.environ.get("S3_BUCKET_NAME") or "ichatbio-edi-agent-artifact-test"
         s3_client = S3Client(bucket_name=bucket_name)
-        s3_key = f"{params.id.replace('.', '_')}/metadata.json"
+        metadata_s3_key = f"{params.id.replace('.', '_')}/metadata.json"
+        schema_s3_key = f"{params.id.replace('.', '_')}/metadata_schema.json"
 
         try:
-            object_exists = s3_client.object_exists(s3_key)
+            object_exists = s3_client.object_exists(metadata_s3_key)
             if object_exists:
-                await process.log(f"Object already exists at s3://{bucket_name}/{s3_key}")
+                await process.log(f"Object already exists at s3://{bucket_name}/{metadata_s3_key}")
             else:
                 try:
                     url = f"https://pasta.lternet.edu/package/metadata/eml/{params.id.replace('.', '/')}"
@@ -42,15 +44,22 @@ async def run(self, context: ResponseContext, request: str, params: AnalysisRequ
                     await context.reply(f"Error fetching metadata: {e}")
                     return
                 await process.log(f"Fetched metadata")
-                s3_client.upload_json(s3_key, metadata)
-                await process.log(f"Uploaded metadata to s3://{bucket_name}/{s3_key}")
-            s3_url = s3_client.get_s3_url(s3_key)
+                s3_client.upload_json(metadata_s3_key, metadata)
+                await process.log(f"Uploaded metadata")
+                builder = SchemaBuilder()
+                builder.add_object(metadata)
+                schema = builder.to_schema()
+                s3_client.upload_json(schema_s3_key, schema)
+                await process.log(f"Uploaded schema")
+            metadata_s3_url = s3_client.get_s3_url(metadata_s3_key)
+            schema_s3_url = s3_client.get_s3_url(schema_s3_key)
             await process.create_artifact(
                 mimetype="application/json",
                 description=f"Metadata for dataset {params.id}",
-                uris=[s3_url],
-                metadata={"api_query_url": s3_url}
+                uris=[metadata_s3_url, schema_s3_url],
+                metadata={"metadata": metadata_s3_url, "schema": schema_s3_url}
             )
+            
             await context.reply("Metadata processed successfully.")
         except Exception as e:
             await context.reply(f"Error with S3 operations: {e}")

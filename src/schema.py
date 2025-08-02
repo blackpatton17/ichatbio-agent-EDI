@@ -112,4 +112,8 @@ class CodeGenerationRequestModel(BaseModel):
         description="The unique identifier of the record to generate code for.",
         example="edi.456.5"
     )
-    
+
+class MetadataExtractionResponseModel(BaseModel):
+    essential_keys: List[str] = Field(
+        description="A list of essential keys extracted from the metadata."
+    )

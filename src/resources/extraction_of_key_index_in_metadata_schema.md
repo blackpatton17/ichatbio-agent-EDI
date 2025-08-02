@@ -22,6 +22,10 @@ A JSON object representing metadata that follows the provided schema.
 
 The metadata will include nested objects and arrays for dataset descriptions, access details, and structure.
 
+#### Note:
+ - We ingore spaitial data at current scope.
+ - We need `additionalMetadata` for the definition of customized the variables and unites in the dataset.
+
 ### Output:
 Return a JSON array of strings, each string being a dot-separated path to a field.
 
